@@ -1,11 +1,7 @@
 import Layout from './components/layout/Layout'
 
 function App() {
-  return (
-    <Layout>
-      <main>hello</main>
-    </Layout>
-  )
+  return <Layout />
 }
 
 export default App
