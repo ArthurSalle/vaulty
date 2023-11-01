@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
-import ErrorPage from './components/error/error-page'
+import ErrorPage from './modules/shared/components/error-page'
 import { Vault } from './routes/vault'
 import { Wallet } from './routes/wallet'
 import { Identity } from './routes/identity'
 import { Settings } from './routes/settings'
+import { CreateIdentity } from './modules/identity/CreateIdentity'
+import { IdentitiesLoader, IdentityList } from './modules/identity/IdentityList'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,17 @@ const router = createBrowserRouter([
       {
         path: '/identity',
         element: <Identity />,
+        children: [
+          {
+            index: true,
+            element: <IdentityList />,
+            loader: IdentitiesLoader,
+          },
+          {
+            path: '/identity/new',
+            element: <CreateIdentity />,
+          },
+        ],
       },
       {
         path: '/settings',

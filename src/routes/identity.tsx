@@ -1,3 +1,5 @@
+import { Outlet } from 'react-router-dom'
+
 export const Identity = () => {
-  return <div>Identity</div>
+  return <Outlet />
 }
