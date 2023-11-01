@@ -31,13 +31,19 @@ const router = createBrowserRouter([
         element: <Identity />,
         children: [
           {
-            index: true,
+            path: '',
             element: <IdentityList />,
             loader: IdentitiesLoader,
-          },
-          {
-            path: '/identity/new',
-            element: <CreateIdentity />,
+            children: [
+              {
+                path: '',
+                element: <p>hello</p>,
+              },
+              {
+                path: 'new',
+                element: <CreateIdentity />,
+              },
+            ],
           },
         ],
       },
