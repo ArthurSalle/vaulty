@@ -8,8 +8,18 @@ import { Vault } from './routes/vault'
 import { Wallet } from './routes/wallet'
 import { Identity } from './routes/identity'
 import { Settings } from './routes/settings'
-import { CreateIdentity } from './modules/identity/CreateIdentity'
-import { IdentitiesLoader, IdentityList } from './modules/identity/IdentityList'
+import {
+  CreateIdentity,
+  action as IdentityAction,
+} from './modules/identity/components/CreateIdentity'
+import {
+  IdentitiesLoader,
+  IdentityList,
+} from './modules/identity/components/IdentityList'
+import {
+  IdentityLoader,
+  IdentityPage,
+} from './modules/identity/components/IdentityPage'
 
 const router = createBrowserRouter([
   {
@@ -34,14 +44,24 @@ const router = createBrowserRouter([
             path: '',
             element: <IdentityList />,
             loader: IdentitiesLoader,
+            shouldRevalidate: ({ currentUrl }) => {
+              return currentUrl.pathname === '/identity/new'
+            },
             children: [
               {
                 path: '',
-                element: <p>hello</p>,
+                index: true,
+                element: <p>Identity Home</p>,
+              },
+              {
+                path: ':identityId',
+                element: <IdentityPage />,
+                loader: IdentityLoader,
               },
               {
                 path: 'new',
                 element: <CreateIdentity />,
+                action: IdentityAction,
               },
             ],
           },
