@@ -13,7 +13,7 @@ export const Nav = () => {
 
   return (
     <>
-      <nav className='w-16 h-screen flex justify-center items-center border-r'>
+      <nav className='max-w-[64px] w-full h-screen flex justify-center items-center border-r'>
         <ul className='h-1/2 flex flex-col justify-around'>
           <NavLink
             to='/vault'
