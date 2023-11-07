@@ -17,7 +17,7 @@ export const identitySchema = z.object({
   }),
   phone: z
     .union([
-      z.string().length(14, {
+      z.string().length(10, {
         message: 'Phone number must be 10 characters.',
       }),
       z.string().refine((val) => val === ''),
@@ -34,7 +34,18 @@ export const identitySchema = z.object({
   relation: z
     .enum(['Myself', 'Family', 'Friends', 'Work mates', 'Other'])
     .optional(),
-  avatar: z.string().url({ message: 'Invalid url' }).optional(),
+  avatar: z
+    .union([
+      z.string().url({ message: 'Invalid url' }),
+      z.string().refine((val) => val === ''),
+    ])
+    .optional(),
+  default_identity: z.boolean().optional(),
+})
+
+export const defaultIdentitySchema = z.object({
+  default_identity: z.boolean().default(false).optional(),
 })
 
 export type IdentitySchema = z.infer<typeof identitySchema>
+export type DefaultIdentitySchema = z.infer<typeof defaultIdentitySchema>

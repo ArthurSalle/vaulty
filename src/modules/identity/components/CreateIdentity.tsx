@@ -11,12 +11,8 @@ import {
 } from '../../../components/ui/form'
 import { Input } from '../../../components/ui/input'
 import { Button } from '../../../components/ui/button'
-import {
-  capitalizeFirstLetter,
-  cn,
-  formatPhoneNumber,
-} from '@/modules/shared/lib/utils'
-import { IdentitySchema, avatarUrl, identitySchema } from '../helpers/schemas'
+import { capitalizeFirstLetter, cn } from '@/modules/shared/lib/utils'
+import { IdentitySchema, identitySchema } from '../helpers/schemas'
 import { saveIdentity } from '../storage/storage'
 import { toast } from '@/components/ui/use-toast'
 import { ActionFunctionArgs, redirect, useSubmit } from 'react-router-dom'
@@ -62,6 +58,7 @@ export const CreateIdentity = () => {
         toast({
           title: 'The identity has been successfully created! 🥳',
           description: 'Check it out.',
+          duration: 2500,
         })
 
         submit(
@@ -77,6 +74,7 @@ export const CreateIdentity = () => {
         toast({
           title: 'This identity already exists! 😬',
           description: 'Please edit the existing identity.',
+          duration: 2500,
         })
       },
     })
@@ -136,11 +134,7 @@ export const CreateIdentity = () => {
                 <FormItem>
                   <FormLabel>Phone Number</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder='+33'
-                      {...field}
-                      value={formatPhoneNumber(field.value!)}
-                    />
+                    <Input placeholder='+33' {...field} value={field.value} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -154,7 +148,7 @@ export const CreateIdentity = () => {
                 <FormItem>
                   <FormLabel>Email Adress</FormLabel>
                   <FormControl>
-                    <Input placeholder='john.doe@mail.com' {...field} />
+                    <Input placeholder='john.doe@mail.io' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -172,7 +166,9 @@ export const CreateIdentity = () => {
                   </FormControl>
                   <FormDescription>
                     No URL? Try this one:&nbsp;
-                    <i>https://github.com/ArthurSalle.png</i>
+                    <i>
+                      https://api.dicebear.com/7.x/notionists/svg?seed=Harley
+                    </i>
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -243,7 +239,7 @@ export const CreateIdentity = () => {
                       </FormControl>
                       <SelectContent>
                         <SelectItem value='Man'>Man</SelectItem>
-                        <SelectItem value='Woman'>Men</SelectItem>
+                        <SelectItem value='Woman'>Woman</SelectItem>
                         <SelectItem value='Other'>Other</SelectItem>
                       </SelectContent>
                     </Select>
@@ -269,11 +265,36 @@ export const CreateIdentity = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value='Myself'>Myself</SelectItem>
-                        <SelectItem value='Family'>Family</SelectItem>
-                        <SelectItem value='Friends'>Friends</SelectItem>
-                        <SelectItem value='Work mates'>Work mates</SelectItem>
-                        <SelectItem value='Other'>Other</SelectItem>
+                        <SelectItem value='Myself'>
+                          <div className='flex items-center gap-2'>
+                            <div className='h-4 w-4 bg-amber-400 rounded-full' />
+                            <span>Myself</span>
+                          </div>
+                        </SelectItem>
+                        <SelectItem value='Family'>
+                          <div className='flex items-center gap-2'>
+                            <div className='h-4 w-4 bg-rose-400 rounded-full' />
+                            <span>Family</span>
+                          </div>
+                        </SelectItem>
+                        <SelectItem value='Friends'>
+                          <div className='flex items-center gap-2'>
+                            <div className='h-4 w-4 bg-indigo-400 rounded-full' />
+                            <span>Friends</span>
+                          </div>
+                        </SelectItem>
+                        <SelectItem value='Work mates'>
+                          <div className='flex items-center gap-2'>
+                            <div className='h-4 w-4 bg-teal-400 rounded-full' />
+                            <span>Work mates</span>
+                          </div>
+                        </SelectItem>
+                        <SelectItem value='Other'>
+                          <div className='flex items-center gap-2'>
+                            <div className='h-4 w-4 bg-neutral-400 rounded-full' />
+                            <span>Other</span>
+                          </div>
+                        </SelectItem>
                       </SelectContent>
                     </Select>
 

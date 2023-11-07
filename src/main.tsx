@@ -19,6 +19,7 @@ import {
 import {
   IdentityLoader,
   IdentityPage,
+  action as IdentityIdAction,
 } from './modules/identity/components/IdentityPage'
 
 const router = createBrowserRouter([
@@ -44,8 +45,8 @@ const router = createBrowserRouter([
             path: '',
             element: <IdentityList />,
             loader: IdentitiesLoader,
-            shouldRevalidate: ({ currentUrl }) => {
-              return currentUrl.pathname === '/identity/new'
+            shouldRevalidate: ({ formMethod }) => {
+              return formMethod === 'post' || formMethod === 'POST'
             },
             children: [
               {
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
                 path: ':identityId',
                 element: <IdentityPage />,
                 loader: IdentityLoader,
+                action: IdentityIdAction,
+              },
+              {
+                path: ':identityId/edit',
+                element: <>Edit</>,
               },
               {
                 path: 'new',

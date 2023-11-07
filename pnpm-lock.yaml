@@ -44,6 +44,9 @@ dependencies:
   date-fns:
     specifier: ^2.30.0
     version: 2.30.0
+  libphonenumber-js:
+    specifier: ^1.10.49
+    version: 1.10.49
   lucide-react:
     specifier: ^0.290.0
     version: 0.290.0(react@18.2.0)
@@ -2343,6 +2346,10 @@ packages:
       prelude-ls: 1.2.1
       type-check: 0.4.0
     dev: true
+
+  /libphonenumber-js@1.10.49:
+    resolution: {integrity: sha512-gvLtyC3tIuqfPzjvYLH9BmVdqzGDiSi4VjtWe2fAgSdBf0yt8yPmbNnRIHNbR5IdtVkm0ayGuzwQKTWmU0hdjQ==}
+    dev: false
 
   /lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}

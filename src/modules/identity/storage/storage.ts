@@ -1,6 +1,6 @@
 import { Identity, createIdentity } from '../helpers/create-identity'
 import { IDENTITY_STORAGE_KEY } from '../helpers/helpers'
-import { IdentitySchema } from '../helpers/schemas'
+import { DefaultIdentitySchema, IdentitySchema } from '../helpers/schemas'
 import { seedIdentities } from './seed'
 
 export function getIdentities() {
@@ -11,7 +11,13 @@ export function getIdentities() {
     return getIdentities()
   }
 
-  return JSON.parse(storage!) as Identity[]
+  let formattedStorage = JSON.parse(storage!)
+
+  formattedStorage = formattedStorage.sort(
+    (a: any, b: any) => b.default_identity - a.default_identity
+  )
+
+  return formattedStorage as Identity[]
 }
 
 export function getIdentity(id: string) {
@@ -50,4 +56,35 @@ export function saveIdentity(
   storage.push(formatedIdentity)
   localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(storage))
   return onSuccess(formatedIdentity.id)
+}
+
+export function saveAsDefaultIdentity(
+  value: DefaultIdentitySchema,
+  id: string,
+  {
+    onSet,
+    onUnset,
+  }: { onSet: (id: string) => void; onUnset: (id: string) => void }
+) {
+  const identities = getIdentities()
+  const identityToUpdate = identities.find((identity) => identity.id === id)
+
+  const updatedIdentity = {
+    ...identityToUpdate,
+    default_identity: value.default_identity,
+  }
+
+  const updatedIdentities = identities.map((identity) => {
+    if (identity.id === updatedIdentity.id) {
+      return updatedIdentity
+    } else {
+      return { ...identity, default_identity: false }
+    }
+  })
+
+  localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(updatedIdentities))
+  getIdentities()
+  if (value.default_identity) {
+    return onSet(id)
+  } else return onUnset(id)
 }
