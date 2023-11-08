@@ -13,7 +13,10 @@ import { Dispatch, SetStateAction } from 'react'
 import { Identity } from '../helpers/create-identity'
 import { deleteIdentity } from '../storage/storage'
 import { toast } from '@/components/ui/use-toast'
-import { useRevalidator, useSubmit } from 'react-router-dom'
+import {
+  useRevalidator,
+  // useSubmit
+} from 'react-router-dom'
 
 type PropsType = {
   isOpen: boolean
