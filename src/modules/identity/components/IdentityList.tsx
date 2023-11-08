@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
-import { Plus } from 'lucide-react'
+import { Plus, X } from 'lucide-react'
 import { Link, NavLink, Outlet, useLoaderData } from 'react-router-dom'
 import { Identity } from '../helpers/create-identity'
 import { getIdentities } from '../storage/storage'
@@ -13,6 +13,7 @@ import {
   getFirstLetterCapitalized,
   getRelationColor,
 } from '@/modules/shared/lib/utils'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 export function IdentitiesLoader() {
   let identities = getIdentities()
@@ -22,12 +23,46 @@ export function IdentitiesLoader() {
 
 export const IdentityList = () => {
   const identities = useLoaderData() as Identity[]
+  const [search, setSearch] = useState('')
+  const [searchResults, setSearchResults] = useState<Identity[]>([])
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    setSearch(event.target.value)
+  }
+
+  useEffect(() => {
+    const results = identities.filter((identity) => {
+      const searchWords = search.trim().toLowerCase().split(' ')
+      return searchWords.every(
+        (word) =>
+          identity.firstname.toLowerCase().includes(word) ||
+          identity.lastname.toLowerCase().includes(word)
+      )
+    })
+
+    setSearchResults(results)
+  }, [search])
 
   return (
     <div className='flex w-full'>
       <div className='flex flex-col pt-4 w-full max-w-[320px] border-r flex-shrink-0'>
         <div className='flex gap-3 pb-6 px-4 border-b'>
-          <Input placeholder='Search' />
+          <div className='relative flex items-center w-full'>
+            <Input
+              placeholder='Search'
+              value={search}
+              onChange={handleChange}
+            />
+            {search !== '' && (
+              <X
+                size={20}
+                className='absolute right-2  rounded-full cursor-pointer text-muted-foreground'
+                onClick={() => {
+                  setSearch('')
+                }}
+              />
+            )}
+          </div>
 
           <Link
             to='/identity/new'
@@ -40,8 +75,8 @@ export const IdentityList = () => {
         </div>
 
         <ul className='flex flex-col h-full overflow-y-auto'>
-          {identities.length ? (
-            identities.map((identity) => {
+          {searchResults.length ? (
+            searchResults.map((identity) => {
               return (
                 <div key={identity.id}>
                   <li className='flex items-center '>
@@ -89,7 +124,7 @@ export const IdentityList = () => {
             })
           ) : (
             <span className='block py-4 text-center text-muted-foreground'>
-              <i>No identities in your list</i>
+              <i>No identities found</i>
             </span>
           )}
         </ul>
