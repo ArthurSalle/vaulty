@@ -41,7 +41,7 @@ export const IdentityList = () => {
     })
 
     setSearchResults(results)
-  }, [search])
+  }, [search, identities])
 
   return (
     <div className='flex w-full'>
