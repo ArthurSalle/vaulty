@@ -12,6 +12,7 @@ import { Identity } from '../helpers/create-identity'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   cn,
+  formatDate,
   formatPhoneNumber,
   getFirstLetterCapitalized,
   getRelationColor,
@@ -36,7 +37,6 @@ import {
   defaultIdentitySchema,
 } from '../helpers/schemas'
 import { useEffect } from 'react'
-import parsePhoneNumber from 'libphonenumber-js'
 
 export const IdentityLoader: LoaderFunction = ({ params }) => {
   const identity = getIdentity(params.identityId!)
@@ -172,7 +172,7 @@ export const IdentityPage = () => {
           <div className='w-full'>
             <Label>Birth date</Label>
             <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-              {identity.date && identity.date}
+              {identity.date && formatDate(identity.date)}
             </span>
           </div>
           <div className='w-full'>

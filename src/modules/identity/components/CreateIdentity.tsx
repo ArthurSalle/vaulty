@@ -11,7 +11,11 @@ import {
 } from '../../../components/ui/form'
 import { Input } from '../../../components/ui/input'
 import { Button } from '../../../components/ui/button'
-import { capitalizeFirstLetter, cn } from '@/modules/shared/lib/utils'
+import {
+  capitalizeFirstLetter,
+  cn,
+  formatDate,
+} from '@/modules/shared/lib/utils'
 import { IdentitySchema, identitySchema } from '../helpers/schemas'
 import { saveIdentity } from '../storage/storage'
 import { toast } from '@/components/ui/use-toast'
@@ -24,7 +28,6 @@ import {
 import { CalendarIcon } from 'lucide-react'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
-import { format } from 'date-fns'
 import {
   Select,
   SelectContent,
@@ -192,7 +195,7 @@ export const CreateIdentity = () => {
                           )}
                         >
                           {field.value ? (
-                            format(field.value, 'dd/MM/yyyy')
+                            formatDate(field.value!)
                           ) : (
                             <span>Choose a date</span>
                           )}

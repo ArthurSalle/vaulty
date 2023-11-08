@@ -1,15 +1,14 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import parsePhoneNumber from 'libphonenumber-js'
+import { format } from 'date-fns'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
 export function formatPhoneNumber(phoneNumber: string) {
   return parsePhoneNumber(phoneNumber!, 'FR')?.formatInternational()
-  // phoneNumber = phoneNumber?.replace(/\D/g, '')
-  // phoneNumber = phoneNumber?.replace(/(\d{2})(?=\d)/g, '$1 ')
-  // return phoneNumber
 }
 
 export function generateId() {
@@ -45,4 +44,8 @@ export function getRelationColor(relation: string) {
     default:
       return ''
   }
+}
+
+export function formatDate(date: Date) {
+  return format(new Date(date), 'dd/MM/yyyy')
 }

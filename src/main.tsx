@@ -21,6 +21,10 @@ import {
   IdentityPage,
   action as IdentityIdAction,
 } from './modules/identity/components/IdentityPage'
+import {
+  EditIdentity,
+  action as EditIdentityIdAction,
+} from './modules/identity/components/EditIdentity'
 
 const router = createBrowserRouter([
   {
@@ -62,7 +66,9 @@ const router = createBrowserRouter([
               },
               {
                 path: ':identityId/edit',
-                element: <>Edit</>,
+                element: <EditIdentity />,
+                loader: IdentityLoader,
+                action: EditIdentityIdAction,
               },
               {
                 path: 'new',

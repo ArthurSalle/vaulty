@@ -88,3 +88,40 @@ export function saveAsDefaultIdentity(
     return onSet(id)
   } else return onUnset(id)
 }
+
+export function saveEditedIdentity(
+  value: Identity,
+  {
+    onSuccess,
+    onError,
+  }: { onSuccess: (id: string) => void; onError: (errorDetail: string) => void }
+) {
+  const storage = localStorage.getItem(IDENTITY_STORAGE_KEY)
+  let formattedStorage = JSON.parse(storage!)
+
+  const oldIdentityIndex = formattedStorage.findIndex(
+    (identity: Identity) => identity.id === value.id
+  )
+
+  if (oldIdentityIndex !== -1) {
+    const oldObject = formattedStorage[oldIdentityIndex]
+
+    const areObjectsIdentical =
+      JSON.stringify(oldObject) === JSON.stringify(value)
+
+    if (!areObjectsIdentical) {
+      const updatedObject = { ...oldObject, ...value }
+      formattedStorage[oldIdentityIndex] = updatedObject
+    } else {
+      return onError('no modifications')
+    }
+  }
+
+  localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(formattedStorage))
+
+  if (onSuccess) {
+    onSuccess(value.id)
+  } else {
+    onError('error')
+  }
+}
