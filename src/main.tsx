@@ -49,8 +49,10 @@ const router = createBrowserRouter([
             path: '',
             element: <IdentityList />,
             loader: IdentitiesLoader,
-            shouldRevalidate: ({ formMethod }) => {
-              return formMethod === 'post' || formMethod === 'POST'
+            shouldRevalidate: () => {
+              console.log('first')
+              // return args.formMethod === 'post' || args.formMethod === 'POST'
+              return true
             },
             children: [
               {

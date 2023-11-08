@@ -40,7 +40,7 @@ export const IdentityList = () => {
         </div>
 
         <ul className='flex flex-col h-full overflow-y-auto'>
-          {identities ? (
+          {identities.length ? (
             identities.map((identity) => {
               return (
                 <div key={identity.id}>
@@ -89,7 +89,7 @@ export const IdentityList = () => {
             })
           ) : (
             <span className='block py-4 text-center text-muted-foreground'>
-              <i>No created identities</i>
+              <i>No identities in your list</i>
             </span>
           )}
         </ul>

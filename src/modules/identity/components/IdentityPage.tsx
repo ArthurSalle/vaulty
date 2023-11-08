@@ -1,7 +1,7 @@
 import {
   ActionFunctionArgs,
-  Link,
   LoaderFunction,
+  NavLink,
   redirect,
   useLoaderData,
   useParams,
@@ -19,7 +19,7 @@ import {
 } from '@/modules/shared/lib/utils'
 import { Label } from '@/components/ui/label'
 import { Edit, Trash2 } from 'lucide-react'
-import { buttonVariants } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import {
   Form,
@@ -36,7 +36,8 @@ import {
   DefaultIdentitySchema,
   defaultIdentitySchema,
 } from '../helpers/schemas'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { DeleteIdentity } from './DeleteIdentity'
 
 export const IdentityLoader: LoaderFunction = ({ params }) => {
   const identity = getIdentity(params.identityId!)
@@ -57,6 +58,7 @@ export const IdentityPage = () => {
   const identity = useLoaderData() as Identity
   const { identityId } = useParams()
   const submit = useSubmit()
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
   const form = useForm<DefaultIdentitySchema>({
     resolver: zodResolver(defaultIdentitySchema),
@@ -75,15 +77,11 @@ export const IdentityPage = () => {
           description:
             'This identity was set as default for filling contact details.',
           duration: 2500,
-          // className: cn(
-          //   'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4'
-          // ),
         })
         submit(
           { identityId },
           {
             method: 'post',
-            // action: `/identity/${identityId}`,
             encType: 'application/json',
           }
         )
@@ -93,15 +91,11 @@ export const IdentityPage = () => {
           title: 'Unset!',
           description: 'This identity is no longer set as default.',
           duration: 2500,
-          // className: cn(
-          //   'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4'
-          // ),
         })
         submit(
           { identityId },
           {
             method: 'post',
-            action: `/identity/${identityId}`,
             encType: 'application/json',
           }
         )
@@ -136,19 +130,20 @@ export const IdentityPage = () => {
         </div>
 
         <div className='flex gap-2 items-center'>
-          <Link
+          <NavLink
             to={`/identity/${identity.id}/edit`}
             className={buttonVariants({ size: 'icon', variant: 'outline' })}
           >
             <Edit className='h-5' />
-          </Link>
+          </NavLink>
 
-          <Link
-            to=''
-            className={buttonVariants({ size: 'icon', variant: 'outline' })}
+          <Button
+            variant='outline'
+            size='icon'
+            onClick={() => setIsOpenModal(true)}
           >
             <Trash2 className='h-5 text-customred' />
-          </Link>
+          </Button>
         </div>
       </div>
 
@@ -219,6 +214,11 @@ export const IdentityPage = () => {
           </form>
         </Form>
       </div>
+      <DeleteIdentity
+        isOpen={isOpenModal}
+        setIsOpen={setIsOpenModal}
+        identity={identity}
+      />
     </div>
   )
 }

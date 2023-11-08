@@ -125,3 +125,27 @@ export function saveEditedIdentity(
     onError('error')
   }
 }
+
+export function deleteIdentity(
+  id: string,
+  {
+    onSuccess,
+    onError,
+  }: {
+    onSuccess: () => void
+    onError: () => void
+  }
+) {
+  const storage = JSON.parse(localStorage.getItem(IDENTITY_STORAGE_KEY)!)
+
+  const identityToDeleteIndex = storage.findIndex(
+    (identity: Identity) => identity.id === id
+  )
+
+  if (identityToDeleteIndex !== -1) {
+    if (storage.splice(identityToDeleteIndex, 1)) {
+      localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(storage))
+      return onSuccess()
+    } else return onError()
+  } else return onError()
+}
