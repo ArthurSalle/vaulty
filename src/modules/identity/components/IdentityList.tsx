@@ -44,8 +44,8 @@ export const IdentityList = () => {
   }, [search, identities])
 
   return (
-    <div className='flex w-full'>
-      <div className='flex flex-col pt-4 w-full max-w-[320px] border-r flex-shrink-0'>
+    <div className='flex w-full relative max-h-[calc(100vh-53px)] md:max-h-screen'>
+      <div className='flex flex-col pt-4 w-full md:max-w-[250px] lg:max-w-xs border-r flex-shrink-0'>
         <div className='flex gap-3 pb-6 px-4 border-b'>
           <div className='relative flex items-center w-full'>
             <Input
@@ -76,7 +76,7 @@ export const IdentityList = () => {
 
         <ul className='flex flex-col h-full overflow-y-auto'>
           {searchResults.length ? (
-            searchResults.map((identity) => {
+            searchResults.map((identity, i) => {
               return (
                 <div key={identity.id}>
                   <li className='flex items-center '>
@@ -94,7 +94,7 @@ export const IdentityList = () => {
                       <Avatar
                         className={cn(
                           getRelationColor(identity.relation!),
-                          'h-9 w-9 border-2'
+                          'h-11 w-11 border-2 bg-muted'
                         )}
                       >
                         <AvatarImage src={identity.avatar} alt='Avatar' />
@@ -103,8 +103,8 @@ export const IdentityList = () => {
                             getFirstLetterCapitalized(identity.lastname)}
                         </AvatarFallback>
                       </Avatar>
-                      <div className='ml-2 space-y-1'>
-                        <p className='text-sm font-medium leading-none'>
+                      <div className='ml-3 space-y-1 block overflow-x-hidden'>
+                        <p className='text-sm font-medium leading-none truncate'>
                           {capitalizeFirstLetter(identity.firstname) +
                             ' ' +
                             capitalizeFirstLetter(identity.lastname)}
@@ -118,7 +118,8 @@ export const IdentityList = () => {
                       </div>
                     </NavLink>
                   </li>
-                  <Separator />
+
+                  {i === searchResults.length - 1 ? null : <Separator />}
                 </div>
               )
             })

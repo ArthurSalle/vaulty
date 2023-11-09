@@ -105,13 +105,13 @@ export const EditIdentity = () => {
   }
 
   return (
-    <div className='max-h-screen h-full overflow-y-auto py-6 px-12 flex flex-col'>
+    <div className='bg-white h-[calc(100vh-53px)] md:max-h-screen md:h-full absolute inset-0 md:relative overflow-y-auto p-4 md:py-8 md:px-12 flex flex-col'>
       <div className='flex justify-between items-center'>
         <div className='flex items-center gap-6'>
           <Avatar
             className={cn(
               getRelationColor(identity.relation!),
-              'h-20 w-20 border-4 drop-shadow-xl'
+              'h-14 md:h-20 w-14 md:w-20 border-4 drop-shadow-xl bg-muted'
             )}
           >
             <AvatarImage
@@ -126,7 +126,6 @@ export const EditIdentity = () => {
           <div>
             <h1 className='text-2xl font-medium'>
               {identity.firstname + ' ' + identity.lastname}
-              {/* {form.getValues('firstname')} */}
             </h1>
           </div>
         </div>
@@ -140,14 +139,11 @@ export const EditIdentity = () => {
         </div>
       </div>
 
-      <div className='overflow-y-auto w-full flex items-center justify-center h-full'>
-        <div className='flex flex-col gap-6 max-w-md w-full '>
+      <div className='w-full flex items-center justify-center mt-8'>
+        <div className='flex flex-col gap-6 max-w-md w-full'>
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className='space-y-2 mb-4'
-            >
-              <div className='flex gap-6'>
+            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2'>
+              <div className='flex flex-col sm:flex-row gap-2 sm:gap-6'>
                 <FormField
                   control={form.control}
                   name='firstname'
@@ -222,7 +218,7 @@ export const EditIdentity = () => {
                       <Input placeholder='https://yourphoto.png' {...field} />
                     </FormControl>
                     <FormDescription>
-                      No URL? Try this one:&nbsp;
+                      No URL? Try this one:&nbsp; <br className='md:hidden' />
                       <i>
                         https://api.dicebear.com/7.x/notionists/svg?seed=Harley
                       </i>
@@ -280,7 +276,7 @@ export const EditIdentity = () => {
                 )}
               />
 
-              <div className='flex gap-6'>
+              <div className='flex flex-col sm:flex-row gap-2 sm:gap-6'>
                 <FormField
                   control={form.control}
                   name='genre'
@@ -363,7 +359,7 @@ export const EditIdentity = () => {
                 />
               </div>
 
-              <div className='pt-4'>
+              <div className='pt-2'>
                 <Button type='submit'>Save changes</Button>
               </div>
             </form>

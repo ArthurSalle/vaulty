@@ -34,7 +34,7 @@ export function getRelationColor(relation: string) {
     case 'Friends':
       return 'border-indigo-400'
       break
-    case 'Work Mates':
+    case 'Work mates':
       return 'border-teal-400'
       break
     case 'Others':

@@ -18,7 +18,7 @@ import {
   getRelationColor,
 } from '@/modules/shared/lib/utils'
 import { Label } from '@/components/ui/label'
-import { Edit, Trash2 } from 'lucide-react'
+import { ArrowLeft, Edit, Trash2 } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import {
@@ -104,39 +104,27 @@ export const IdentityPage = () => {
   }
 
   return (
-    <div className='max-h-screen h-full overflow-y-auto py-6 px-12 relative'>
-      <div className='flex justify-between items-center'>
-        <div className='flex items-center gap-6'>
-          <Avatar
-            className={cn(
-              getRelationColor(identity.relation!),
-              'h-20 w-20 border-4 drop-shadow-xl'
-            )}
+    <div className='bg-white h-[calc(100vh-53px)] md:max-h-screen md:h-full overflow-y-auto absolute inset-0 md:relative'>
+      <div className='py-2 px-4 md:hidden flex justify-between items-center border-b'>
+        <div>
+          <NavLink
+            to='/identity'
+            className={buttonVariants({
+              size: 'icon',
+              variant: 'outline',
+            })}
           >
-            <AvatarImage
-              src={identity.avatar}
-              alt={`${identity.firstname} avatar`}
-            />
-            <AvatarFallback>
-              {getFirstLetterCapitalized(identity.firstname) +
-                getFirstLetterCapitalized(identity.lastname)}
-            </AvatarFallback>
-          </Avatar>
-          <div>
-            <h1 className='text-2xl font-medium'>
-              {identity.firstname + ' ' + identity.lastname}
-            </h1>
-          </div>
+            <ArrowLeft size={20} strokeWidth={2.5} />
+          </NavLink>
         </div>
 
-        <div className='flex gap-2 items-center'>
+        <div className='flex items-center gap-2'>
           <NavLink
             to={`/identity/${identity.id}/edit`}
             className={buttonVariants({ size: 'icon', variant: 'outline' })}
           >
             <Edit className='h-5' />
           </NavLink>
-
           <Button
             variant='outline'
             size='icon'
@@ -147,53 +135,99 @@ export const IdentityPage = () => {
         </div>
       </div>
 
-      <div className='flex flex-col gap-6 mt-12 mx-auto max-w-xl w-full '>
-        <div className='flex gap-4'>
-          <div className='w-full'>
-            <Label>Phone number</Label>
-            <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-              {identity.phone && formatPhoneNumber(identity.phone)}
-            </span>
+      <div className='py-4 md:py-8 px-4 md:px-12 flex flex-col justify-between max-h-[calc(100%-57px)] md:max-h-full h-full'>
+        <div className='flex flex-col gap-2'>
+          <div className='flex justify-between items-center'>
+            <div className='flex items-center gap-6'>
+              <Avatar
+                className={cn(
+                  getRelationColor(identity.relation!),
+                  'h-14 md:h-20 w-14 md:w-20 border-4 drop-shadow-xl bg-muted'
+                )}
+              >
+                <AvatarImage
+                  src={identity.avatar}
+                  alt={`${identity.firstname} avatar`}
+                />
+                <AvatarFallback>
+                  {getFirstLetterCapitalized(identity.firstname) +
+                    getFirstLetterCapitalized(identity.lastname)}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <h1 className='text-2xl font-medium'>
+                  {identity.firstname + ' ' + identity.lastname}
+                </h1>
+              </div>
+            </div>
+            <div className='md:flex gap-2 items-center hidden'>
+              <NavLink
+                to={`/identity/${identity.id}/edit`}
+                className={buttonVariants({ size: 'icon', variant: 'outline' })}
+              >
+                <Edit className='h-5' />
+              </NavLink>
+              <Button
+                variant='outline'
+                size='icon'
+                onClick={() => setIsOpenModal(true)}
+              >
+                <Trash2 className='h-5 text-customred' />
+              </Button>
+            </div>
           </div>
-          <div className='w-full'>
-            <Label>Mail</Label>
-            <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-              {identity.mail && identity.mail}
-            </span>
-          </div>
-        </div>
 
-        <div className='flex gap-4'>
-          <div className='w-full'>
-            <Label>Birth date</Label>
-            <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-              {identity.date && formatDate(identity.date)}
-            </span>
-          </div>
-          <div className='w-full'>
-            <Label>Genre</Label>
-            <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-              {identity.genre && identity.genre}
-            </span>
-          </div>
-          <div className='w-full'>
-            <Label>Relation</Label>
-            <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-              {identity.relation && identity.relation}
-            </span>
+          <div className='flex flex-col gap-2 lg:gap-4 md:mt-6 lg:mt-12 mx-auto max-w-xl w-full '>
+            <div className='flex flex-col lg:flex-row gap-2'>
+              <div className='w-full'>
+                <Label>Phone number</Label>
+                <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
+                  {identity.phone && formatPhoneNumber(identity.phone)}
+                </span>
+              </div>
+              <div className='w-full'>
+                <Label>Mail</Label>
+                <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
+                  {identity.mail && identity.mail}
+                </span>
+              </div>
+            </div>
+
+            <div className='flex flex-col lg:flex-row gap-2'>
+              <div className='w-full'>
+                <Label>Birth date</Label>
+                <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
+                  {identity.date && formatDate(identity.date)}
+                </span>
+              </div>
+
+              <div className='w-full'>
+                <Label>Genre</Label>
+                <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
+                  {identity.genre && identity.genre}
+                </span>
+              </div>
+
+              <div className='w-full'>
+                <Label>Relation</Label>
+                <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
+                  {identity.relation && identity.relation}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className='max-w-xl w-full mt-10 absolute bottom-8'
+            className='max-w-lg mx-auto py-4 lg:py-0'
           >
             <FormField
               control={form.control}
               name='default_identity'
               render={({ field }) => (
-                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm'>
+                <FormItem className='flex items-center gap-4 md:gap-8 rounded-lg border p-3 shadow-sm'>
                   <div className='space-y-0.5'>
                     <FormLabel>Default Identity</FormLabel>
                     <FormDescription>
@@ -214,6 +248,7 @@ export const IdentityPage = () => {
           </form>
         </Form>
       </div>
+
       <DeleteIdentity
         isOpen={isOpenModal}
         setIsOpen={setIsOpenModal}

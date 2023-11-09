@@ -25,6 +25,7 @@ import {
   EditIdentity,
   action as EditIdentityIdAction,
 } from './modules/identity/components/EditIdentity'
+import { IdentityHome } from './modules/identity/components/IdentityHome'
 
 const router = createBrowserRouter([
   {
@@ -50,7 +51,6 @@ const router = createBrowserRouter([
             element: <IdentityList />,
             loader: IdentitiesLoader,
             shouldRevalidate: () => {
-              console.log('first')
               // return args.formMethod === 'post' || args.formMethod === 'POST'
               return true
             },
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
               {
                 path: '',
                 index: true,
-                element: <p>Identity Home</p>,
+                element: <IdentityHome />,
               },
               {
                 path: ':identityId',

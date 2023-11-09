@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from '../../../components/ui/form'
 import { Input } from '../../../components/ui/input'
-import { Button } from '../../../components/ui/button'
+import { Button, buttonVariants } from '../../../components/ui/button'
 import {
   capitalizeFirstLetter,
   cn,
@@ -19,13 +19,18 @@ import {
 import { IdentitySchema, identitySchema } from '../helpers/schemas'
 import { saveIdentity } from '../storage/storage'
 import { toast } from '@/components/ui/use-toast'
-import { ActionFunctionArgs, redirect, useSubmit } from 'react-router-dom'
+import {
+  ActionFunctionArgs,
+  NavLink,
+  redirect,
+  useSubmit,
+} from 'react-router-dom'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { CalendarIcon } from 'lucide-react'
+import { ArrowLeft, CalendarIcon } from 'lucide-react'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 import {
@@ -84,16 +89,29 @@ export const CreateIdentity = () => {
   }
 
   return (
-    <div className='max-h-screen h-full overflow-y-auto w-full flex items-center justify-center'>
-      <div className='flex flex-col gap-6 max-w-md w-full '>
-        <h1 className='text-3xl font-bold'>Create a new identity</h1>
+    <div className=' w-full bg-white overflow-y-auto absolute inset-0 md:relative h-[calc(100vh-53px)] md:h-full'>
+      <div className='flex flex-col gap-6 max-w-md w-full p-4 mx-auto'>
+        <div className='flex items-center gap-2 md:gap-6'>
+          <NavLink
+            to='/identity'
+            className={buttonVariants({
+              size: 'sm',
+              variant: 'outline',
+            })}
+          >
+            <ArrowLeft size={20} strokeWidth={2.5} />
+          </NavLink>
+          <h1 className='text-2xl md:text-3xl font-bold'>
+            Create a new identity
+          </h1>
+        </div>
 
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className='space-y-2 mb-4'
           >
-            <div className='flex gap-6'>
+            <div className='flex flex-col md:flex-row gap-2 md:gap-6'>
               <FormField
                 control={form.control}
                 name='firstname'
@@ -168,7 +186,7 @@ export const CreateIdentity = () => {
                     <Input placeholder='https://yourphoto.png' {...field} />
                   </FormControl>
                   <FormDescription>
-                    No URL? Try this one:&nbsp;
+                    No URL? Try this one:&nbsp; <br className='md:hidden' />
                     <i>
                       https://api.dicebear.com/7.x/notionists/svg?seed=Harley
                     </i>
@@ -224,7 +242,7 @@ export const CreateIdentity = () => {
               )}
             />
 
-            <div className='flex gap-6'>
+            <div className='flex flex-col md:flex-row gap-2 md:gap-6'>
               <FormField
                 control={form.control}
                 name='genre'
@@ -307,7 +325,7 @@ export const CreateIdentity = () => {
               />
             </div>
 
-            <div className='pt-4'>
+            <div className='pt-2'>
               <Button type='submit'>Save identity</Button>
             </div>
           </form>
