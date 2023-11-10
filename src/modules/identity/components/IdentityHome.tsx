@@ -6,7 +6,7 @@ import { List, PenSquare, Plus } from 'lucide-react'
 export const IdentityHome = () => {
   return (
     <div className='hidden md:block overflow-y-auto max-h-[100dvh]'>
-      <h1 className='text-2xl font-semibold p-4'>Vaulty</h1>
+      <h1 className='text-2xl font-semibold p-4'>vaulty.</h1>
 
       <div className='bg-white h-full w-full flex flex-col px-8 py-4 mt-8 lg:mt-14 justify-center items-center xl:max-w-4xl mx-auto'>
         <h2 className='text-4xl font-bold leading-tight pb-8 lg:pb-4 lg:pt-8 text-center [text-wrap:balance]'>

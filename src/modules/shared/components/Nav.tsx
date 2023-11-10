@@ -62,7 +62,7 @@ export const NavDesktop = () => {
         </ul>
 
         <div className='fixed bottom-0'>
-          <span className='font-semibold'>vaulty</span>
+          <span className='font-semibold'>vaulty.</span>
         </div>
       </nav>
     </>

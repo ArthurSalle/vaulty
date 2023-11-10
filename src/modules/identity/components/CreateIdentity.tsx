@@ -286,28 +286,22 @@ export const CreateIdentity = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value='Myself'>
+                        <SelectItem value='Myself (personal)'>
                           <div className='flex items-center gap-2'>
                             <div className='h-4 w-4 bg-amber-400 rounded-full' />
-                            <span>Myself</span>
+                            <span>Myself (personal)</span>
+                          </div>
+                        </SelectItem>
+                        <SelectItem value='Myself (professional)'>
+                          <div className='flex items-center gap-2'>
+                            <div className='h-4 w-4 bg-teal-400 rounded-full' />
+                            <span>Myself (Professional)</span>
                           </div>
                         </SelectItem>
                         <SelectItem value='Family'>
                           <div className='flex items-center gap-2'>
                             <div className='h-4 w-4 bg-rose-400 rounded-full' />
                             <span>Family</span>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value='Friends'>
-                          <div className='flex items-center gap-2'>
-                            <div className='h-4 w-4 bg-indigo-400 rounded-full' />
-                            <span>Friends</span>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value='Work mates'>
-                          <div className='flex items-center gap-2'>
-                            <div className='h-4 w-4 bg-teal-400 rounded-full' />
-                            <span>Work mates</span>
                           </div>
                         </SelectItem>
                         <SelectItem value='Other'>

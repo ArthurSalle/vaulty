@@ -32,7 +32,7 @@ export const identitySchema = z.object({
   date: z.coerce.date().optional(),
   genre: z.enum(['Man', 'Woman', 'Other']).optional(),
   relation: z
-    .enum(['Myself', 'Family', 'Friends', 'Work mates', 'Other'])
+    .enum(['Myself (personal)', 'Myself (professional)', 'Family', 'Other'])
     .optional(),
   avatar: z
     .union([
