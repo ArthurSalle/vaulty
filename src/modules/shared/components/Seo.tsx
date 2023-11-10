@@ -1,4 +1,4 @@
-import favicon from '../../../../public/lock.svg'
+import favicon from '/public/lock.svg'
 import { Helmet } from 'react-helmet'
 
 const Seo = () => {
