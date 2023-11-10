@@ -89,8 +89,8 @@ export const CreateIdentity = () => {
   }
 
   return (
-    <div className=' w-full bg-white overflow-y-auto absolute inset-0 md:relative h-[calc(100dvh-53px)] md:h-full'>
-      <div className='flex flex-col gap-6 max-w-md w-full p-4 mx-auto'>
+    <div className='w-full bg-white overflow-y-auto absolute inset-0 md:relative h-[calc(100dvh-53px)] md:h-full'>
+      <div className='flex flex-col gap-6 max-w-md w-full px-4 py-4 md:py-8 mx-auto'>
         <div className='flex items-center gap-2 md:gap-6'>
           <NavLink
             to='/identity'
@@ -325,7 +325,7 @@ export const CreateIdentity = () => {
               />
             </div>
 
-            <div className='pt-2'>
+            <div className='pt-4'>
               <Button type='submit'>Save identity</Button>
             </div>
           </form>

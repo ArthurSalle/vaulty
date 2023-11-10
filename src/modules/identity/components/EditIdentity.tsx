@@ -359,7 +359,7 @@ export const EditIdentity = () => {
                 />
               </div>
 
-              <div className='pt-2'>
+              <div className='pt-4'>
                 <Button type='submit'>Save changes</Button>
               </div>
             </form>

@@ -104,7 +104,7 @@ export const IdentityPage = () => {
   }
 
   return (
-    <div className='bg-white h-[calc(100dvh-53px)] md:max-h-screen overflow-y-auto absolute inset-0 md:relative'>
+    <div className='bg-white h-[calc(100dvh-53px)] md:h-screen overflow-y-auto absolute inset-0 md:relative'>
       <div className='py-2 px-4 md:hidden flex justify-between items-center border-b'>
         <div>
           <NavLink
@@ -135,7 +135,7 @@ export const IdentityPage = () => {
         </div>
       </div>
 
-      <div className='py-4 md:py-8 px-4 md:px-12 flex flex-col justify-between max-h-[calc(100%-57px)] md:max-h-full h-full'>
+      <div className='py-4 md:py-8 px-4 md:px-12 flex flex-col justify-between max-h-[calc(100%-57px)] md:max-h-[100dvh] h-full'>
         <div className='flex flex-col gap-2'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center gap-6'>
