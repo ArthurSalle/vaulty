@@ -3,7 +3,7 @@
 // import arrowStraight from '../../../assets/img/arrow-straight.svg'
 // import { List, PenSquare, Plus } from 'lucide-react'
 
-export const VaultHome = () => {
+export const WalletHome = () => {
   return (
     <div className='w-full'>
       <h1 className='text-2xl font-semibold p-4'>vaulty.</h1>
@@ -12,7 +12,7 @@ export const VaultHome = () => {
         <h2 className='text-4xl font-bold leading-tight pb-8 lg:pb-4 lg:pt-8 text-center [text-wrap:balance]'>
           Store all your&nbsp;
           <span className='px-2 rounded-[2px] bg-gradient-to-r from-red-400 to-amber-400'>
-            passwords
+            credit cards
           </span>
           &nbsp;in one only safe place
         </h2>

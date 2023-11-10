@@ -27,6 +27,7 @@ import {
 } from './modules/identity/components/EditIdentity'
 import { IdentityHome } from './modules/identity/components/IdentityHome'
 import { VaultHome } from './modules/vault/components/VaultHome'
+import { WalletHome } from './modules/wallet/components/WalletHome'
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,12 @@ const router = createBrowserRouter([
       {
         path: '/wallet',
         element: <Wallet />,
+        children: [
+          {
+            path: '',
+            element: <WalletHome />,
+          },
+        ],
       },
       {
         path: '/identity',
