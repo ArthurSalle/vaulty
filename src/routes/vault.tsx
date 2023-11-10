@@ -1,3 +1,5 @@
+import { Outlet } from 'react-router-dom'
+
 export const Vault = () => {
-  return <div>Vault</div>
+  return <Outlet />
 }

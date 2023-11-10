@@ -26,6 +26,7 @@ import {
   action as EditIdentityIdAction,
 } from './modules/identity/components/EditIdentity'
 import { IdentityHome } from './modules/identity/components/IdentityHome'
+import { VaultHome } from './modules/vault/components/VaultHome'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,12 @@ const router = createBrowserRouter([
       {
         path: '/vault',
         element: <Vault />,
+        children: [
+          {
+            path: '',
+            element: <VaultHome />,
+          },
+        ],
       },
       {
         path: '/wallet',
