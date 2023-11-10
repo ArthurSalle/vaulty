@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 export default function Layout() {
   return (
-    <div className='flex max-h-[calc(100vh-53px)] md:max-h-[100dvh] h-full relative'>
+    <div className='flex w-full h-full relative'>
       <NavDesktop />
       <NavMobile />
 
