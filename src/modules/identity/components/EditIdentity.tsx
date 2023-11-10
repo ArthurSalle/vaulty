@@ -105,13 +105,13 @@ export const EditIdentity = () => {
   }
 
   return (
-    <div className='bg-white h-[calc(100vh-53px)] md:max-h-screen md:h-full absolute inset-0 md:relative overflow-y-auto p-4 md:py-8 md:px-12 flex flex-col'>
+    <div className='bg-white h-[calc(100dvh-53px)] md:max-h-screen md:h-full absolute inset-0 md:relative overflow-y-auto p-4 md:py-8 md:px-12 flex flex-col'>
       <div className='flex justify-between items-center'>
         <div className='flex items-center gap-6'>
           <Avatar
             className={cn(
               getRelationColor(identity.relation!),
-              'h-14 md:h-20 w-14 md:w-20 border-4 drop-shadow-xl bg-muted'
+              'h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-muted'
             )}
           >
             <AvatarImage

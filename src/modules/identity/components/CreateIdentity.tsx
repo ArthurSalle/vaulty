@@ -89,7 +89,7 @@ export const CreateIdentity = () => {
   }
 
   return (
-    <div className=' w-full bg-white overflow-y-auto absolute inset-0 md:relative h-[calc(100vh-53px)] md:h-full'>
+    <div className=' w-full bg-white overflow-y-auto absolute inset-0 md:relative h-[calc(100dvh-53px)] md:h-full'>
       <div className='flex flex-col gap-6 max-w-md w-full p-4 mx-auto'>
         <div className='flex items-center gap-2 md:gap-6'>
           <NavLink

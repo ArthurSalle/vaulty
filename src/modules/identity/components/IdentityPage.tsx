@@ -104,7 +104,7 @@ export const IdentityPage = () => {
   }
 
   return (
-    <div className='bg-white h-[calc(100vh-53px)] md:max-h-screen md:h-full overflow-y-auto absolute inset-0 md:relative'>
+    <div className='bg-white h-[calc(100dvh-53px)] md:max-h-screen md:h-full overflow-y-auto absolute inset-0 md:relative'>
       <div className='py-2 px-4 md:hidden flex justify-between items-center border-b'>
         <div>
           <NavLink
@@ -142,7 +142,7 @@ export const IdentityPage = () => {
               <Avatar
                 className={cn(
                   getRelationColor(identity.relation!),
-                  'h-14 md:h-20 w-14 md:w-20 border-4 drop-shadow-xl bg-muted'
+                  'h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-muted'
                 )}
               >
                 <AvatarImage
