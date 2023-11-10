@@ -1,10 +1,10 @@
 import Layout from './components/layout/Layout'
-import Seo from './modules/shared/components/Seo'
+// import Seo from './modules/shared/components/Seo'
 
 function App() {
   return (
     <>
-      <Seo />
+      {/* <Seo /> */}
       <Layout />
     </>
   )
