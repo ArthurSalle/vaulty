@@ -44,8 +44,8 @@ export const IdentityList = () => {
   }, [search, identities])
 
   return (
-    <div className='flex w-full relative max-h-[calc(100vh-53px)] md:max-h-screen'>
-      <div className='flex flex-col pt-4 w-full md:max-w-[250px] lg:max-w-xs border-r flex-shrink-0'>
+    <div className='flex w-full relative '>
+      <div className='flex flex-col pt-4 w-full md:max-w-[250px] lg:max-w-xs max-h-[calc(100vh-53px)] md:max-h-screen border-r flex-shrink-0'>
         <div className='flex gap-3 pb-6 px-4 border-b'>
           <div className='relative flex items-center w-full'>
             <Input
