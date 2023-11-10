@@ -14,7 +14,7 @@ export const Settings = () => {
           <span className='px-2 rounded-[2px] bg-gradient-to-r from-red-400 to-amber-400'>
             settings
           </span>
-          &nbsp;juste here
+          &nbsp;just here
         </h2>
 
         <h2 className='text-3xl font-bold leading-tight pb-8 lg:pb-4 lg:pt-8 text-center [text-wrap:balance] mt-12'>
