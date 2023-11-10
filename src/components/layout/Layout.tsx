@@ -1,6 +1,7 @@
 import { Toaster } from '../ui/toaster'
 import { NavDesktop, NavMobile } from '../../modules/shared/components/Nav'
 import { Outlet } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 
 export default function Layout() {
   return (
@@ -10,6 +11,7 @@ export default function Layout() {
 
       <Outlet />
       <Toaster />
+      <Analytics />
     </div>
   )
 }
