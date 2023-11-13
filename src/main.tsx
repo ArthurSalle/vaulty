@@ -4,7 +4,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
 import ErrorPage from './modules/shared/components/error-page'
-import { Vault } from './routes/vault'
+import { Connection } from './routes/connection'
 import { Wallet } from './routes/wallet'
 import { Identity } from './routes/identity'
 import { Settings } from './routes/settings'
@@ -26,8 +26,21 @@ import {
   action as EditIdentityIdAction,
 } from './modules/identity/components/EditIdentity'
 import { IdentityHome } from './modules/identity/components/IdentityHome'
-import { VaultHome } from './modules/vault/components/VaultHome'
+import { ConnectionHome } from './modules/connection/components/ConnectionHome'
 import { WalletHome } from './modules/wallet/components/WalletHome'
+import {
+  ConnectionsLoader,
+  ConnectionList,
+} from './modules/connection/components/ConnectionList'
+import {
+  CreateConnection,
+  action as ConnectionAction,
+} from './modules/connection/components/CreateConnection'
+import {
+  ConnectionPage,
+  ConnectionLoader,
+  action as ConnectionIdAction,
+} from './modules/connection/components/ConnectionPage'
 
 const router = createBrowserRouter([
   {
@@ -35,14 +48,37 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Vault /> },
+      { index: true, element: <Connection /> },
       {
-        path: '/vault',
-        element: <Vault />,
+        path: '/connection',
+        element: <Connection />,
         children: [
           {
             path: '',
-            element: <VaultHome />,
+            element: <ConnectionList />,
+            loader: ConnectionsLoader,
+            shouldRevalidate: (args) => {
+              console.log(args)
+              return true
+            },
+            children: [
+              {
+                path: '',
+                index: true,
+                element: <ConnectionHome />,
+              },
+              {
+                path: 'new',
+                element: <CreateConnection />,
+                action: ConnectionAction,
+              },
+              {
+                path: ':connectionId',
+                element: <ConnectionPage />,
+                loader: ConnectionLoader,
+                action: ConnectionIdAction,
+              },
+            ],
           },
         ],
       },
@@ -64,7 +100,8 @@ const router = createBrowserRouter([
             path: '',
             element: <IdentityList />,
             loader: IdentitiesLoader,
-            shouldRevalidate: () => {
+            shouldRevalidate: (args) => {
+              // console.log('first')
               // return args.formMethod === 'post' || args.formMethod === 'POST'
               return true
             },
