@@ -14,12 +14,18 @@ export const NavDesktop = () => {
     <>
       <nav className='hidden md:flex flex-col max-w-[64px] w-full min-h-screen justify-center items-center border-r'>
         <div className='mb-auto mt-4'>
-          <span className='font-semibold text-3xl'>
-            v
-            <span className='bg-gradient-to-r from-red-400 to-amber-400 text-transparent bg-clip-text'>
-              .
-            </span>
-          </span>
+          <NavLink
+            to='/'
+            className='p-4'
+            children={() => (
+              <span className='font-semibold text-3xl'>
+                v
+                <span className='bg-gradient-to-r from-red-400 to-amber-400 text-transparent bg-clip-text'>
+                  .
+                </span>
+              </span>
+            )}
+          />
         </div>
 
         <ul className='my-auto h-1/2 flex flex-col justify-around'>
