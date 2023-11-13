@@ -12,17 +12,26 @@ export const NavDesktop = () => {
 
   return (
     <>
-      <nav className='hidden md:flex max-w-[64px] w-full min-h-screen justify-center items-center border-r'>
-        <ul className='h-1/2 flex flex-col justify-around'>
+      <nav className='hidden md:flex flex-col max-w-[64px] w-full min-h-screen justify-center items-center border-r'>
+        <div className='mb-auto mt-4'>
+          <span className='font-semibold text-3xl'>
+            v
+            <span className='bg-gradient-to-r from-red-400 to-amber-400 text-transparent bg-clip-text'>
+              .
+            </span>
+          </span>
+        </div>
+
+        <ul className='my-auto h-1/2 flex flex-col justify-around'>
           <NavLink
-            to='/vault'
+            to='/connection'
             className={() =>
-              pathname === '/' || pathname === '/vault'
+              pathname.includes('connection')
                 ? 'bg-muted p-3 rounded-full'
                 : 'p-3 hover:bg-muted rounded-full transition-colors hover:duration-300'
             }
             children={() =>
-              pathname === '/' || pathname === '/vault' ? (
+              pathname.includes('connection') ? (
                 <UnlockKeyhole size={25} strokeWidth={1.7} />
               ) : (
                 <LockKeyhole size={25} strokeWidth={1.7} />
@@ -61,8 +70,17 @@ export const NavDesktop = () => {
           />
         </ul>
 
-        <div className='fixed bottom-0'>
-          <span className='font-semibold'>vaulty.</span>
+        <div
+          className='mt-auto block invisible overflow-hidden'
+          aria-hidden
+          tabIndex={-1}
+        >
+          <span className='font-semibold text-3xl'>
+            v
+            <span className='bg-gradient-to-r from-red-400 to-amber-400 text-transparent bg-clip-text'>
+              .
+            </span>
+          </span>
         </div>
       </nav>
     </>
@@ -77,14 +95,14 @@ export const NavMobile = () => {
       <nav className='block md:hidden bg-white fixed bottom-0 left-0 right-0 z-50 w-full py-2 border-t'>
         <ul className='flex justify-center items-center gap-10'>
           <NavLink
-            to='/vault'
+            to='/connection'
             className={() =>
-              pathname === '/' || pathname === '/vault'
+              pathname === '/' || pathname === '/connection'
                 ? 'bg-muted p-2 rounded-full'
                 : 'p-2 hover:bg-muted rounded-full transition-colors hover:duration-300'
             }
             children={() =>
-              pathname === '/' || pathname === '/vault' ? (
+              pathname === '/' || pathname === '/connection' ? (
                 <UnlockKeyhole size={20} strokeWidth={1.7} />
               ) : (
                 <LockKeyhole size={20} strokeWidth={1.7} />
