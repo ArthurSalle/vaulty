@@ -295,7 +295,7 @@ export const CreateIdentity = () => {
                         <SelectItem value='Myself (professional)'>
                           <div className='flex items-center gap-2'>
                             <div className='h-4 w-4 bg-teal-400 rounded-full' />
-                            <span>Myself (Professional)</span>
+                            <span>Myself (professional)</span>
                           </div>
                         </SelectItem>
                         <SelectItem value='Family'>
