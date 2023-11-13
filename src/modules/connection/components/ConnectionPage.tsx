@@ -4,7 +4,6 @@ import {
   NavLink,
   redirect,
   useLoaderData,
-  useParams,
 } from 'react-router-dom'
 import { getConnection } from '../storage/storage'
 import { Button, buttonVariants } from '@/components/ui/button'
