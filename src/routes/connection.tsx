@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
 
-export const Vault = () => {
+export const Connection = () => {
   return <Outlet />
 }
