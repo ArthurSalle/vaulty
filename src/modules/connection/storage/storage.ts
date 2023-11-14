@@ -78,3 +78,34 @@ export function deleteConnection(
     } else return onError()
   } else return onError()
 }
+
+export function saveEditedConnection(
+  value: Connection,
+  {
+    onSuccess,
+    onError,
+  }: {
+    onSuccess: (id: string) => void
+    onError: () => void
+  }
+) {
+  const storage = getConnections()
+
+  const oldConnectionIndex = storage.findIndex(
+    (connection: Connection) => connection.id === value.id
+  )
+
+  if (oldConnectionIndex !== -1) {
+    const oldObject = storage[oldConnectionIndex]
+    const updatedObject = { ...oldObject, ...value }
+    storage[oldConnectionIndex] = updatedObject
+  } else return onError()
+
+  localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(storage))
+
+  if (onSuccess) {
+    onSuccess(value.id)
+  } else {
+    onError()
+  }
+}

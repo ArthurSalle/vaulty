@@ -41,6 +41,10 @@ import {
   ConnectionLoader,
   action as ConnectionIdAction,
 } from './modules/connection/components/ConnectionPage'
+import {
+  EditConnection,
+  action as EditConnectionIdAction,
+} from './modules/connection/components/EditConnection'
 
 const router = createBrowserRouter([
   {
@@ -57,8 +61,9 @@ const router = createBrowserRouter([
             path: '',
             element: <ConnectionList />,
             loader: ConnectionsLoader,
-            shouldRevalidate: (args) => {
-              console.log(args)
+            shouldRevalidate: () => {
+              // console.log(args)
+              // return args.formMethod === 'post'
               return true
             },
             children: [
@@ -77,6 +82,12 @@ const router = createBrowserRouter([
                 element: <ConnectionPage />,
                 loader: ConnectionLoader,
                 action: ConnectionIdAction,
+              },
+              {
+                path: ':connectionId/edit',
+                element: <EditConnection />,
+                loader: ConnectionLoader,
+                action: EditConnectionIdAction,
               },
             ],
           },
