@@ -13,6 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { useState } from 'react'
+import { DeleteConnection } from './DeleteConnection'
 
 export const ConnectionLoader: LoaderFunction = ({ params }) => {
   const connection = getConnection(params.connectionId!)
@@ -32,6 +33,7 @@ export const ConnectionPage = () => {
   const connection = useLoaderData() as Connection
   // const { connectionId } = useParams()
   const [visibility, setVisibily] = useState(false)
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
   return (
     <div className='bg-white h-[calc(100dvh-53px)] md:h-screen overflow-y-auto absolute inset-0 md:relative'>
@@ -58,7 +60,7 @@ export const ConnectionPage = () => {
           <Button
             variant='outline'
             size='icon'
-            // onClick={() => setIsOpenModal(true)}
+            onClick={() => setIsOpenModal(true)}
           >
             <Trash2 className='h-5 text-customred' />
           </Button>
@@ -96,7 +98,7 @@ export const ConnectionPage = () => {
               <Button
                 variant='outline'
                 size='icon'
-                // onClick={() => setIsOpenModal(true)}
+                onClick={() => setIsOpenModal(true)}
               >
                 <Trash2 className='h-5 text-customred' />
               </Button>
@@ -154,43 +156,13 @@ export const ConnectionPage = () => {
             </div>
           </div>
         </div>
-
-        {/* <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className='max-w-lg mx-auto py-4 lg:py-0'
-          >
-            <FormField
-              control={form.control}
-              name='default_identity'
-              render={({ field }) => (
-                <FormItem className='flex items-center gap-4 md:gap-8 rounded-lg border p-3 shadow-sm'>
-                  <div className='space-y-0.5'>
-                    <FormLabel>Default Identity</FormLabel>
-                    <FormDescription>
-                      Set this identity as the default for filling in contact
-                      details
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      type='submit'
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </form>
-        </Form> */}
       </div>
 
-      {/* <DeleteIdentity
+      <DeleteConnection
         isOpen={isOpenModal}
         setIsOpen={setIsOpenModal}
-        identity={identity}
-      /> */}
+        connection={connection}
+      />
     </div>
   )
 }

@@ -54,3 +54,27 @@ export function saveConnection(
   localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(storage))
   return onSuccess(formattedConnection.id)
 }
+
+export function deleteConnection(
+  id: string,
+  {
+    onSuccess,
+    onError,
+  }: {
+    onSuccess: () => void
+    onError: () => void
+  }
+) {
+  const storage = getConnections()
+
+  const connectionToDeleteIndex = storage.findIndex(
+    (connection: Connection) => connection.id === id
+  )
+
+  if (connectionToDeleteIndex !== 1) {
+    if (storage.splice(connectionToDeleteIndex, 1)) {
+      localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(storage))
+      return onSuccess()
+    } else return onError()
+  } else return onError()
+}
