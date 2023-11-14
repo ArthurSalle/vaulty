@@ -17,10 +17,17 @@ import {
   redirect,
   useSubmit,
 } from 'react-router-dom'
-import { ArrowLeft, Eye, EyeOff } from 'lucide-react'
+import { ArrowLeft, Cog, Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { saveConnection } from '../storage/storage'
 import { toast } from '@/components/ui/use-toast'
+import { PasswordGenerationModal } from './PasswordGenerationModal'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 export async function action({ request }: ActionFunctionArgs) {
   const data = (await request.json()) as { id: string }
@@ -28,8 +35,9 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export const CreateConnection = () => {
-  const [visibility, setVisibily] = useState(false)
   const submit = useSubmit()
+  const [visibility, setVisibily] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
 
   const form = useForm<ConnectionSchema>({
     resolver: zodResolver(connectionSchema),
@@ -69,6 +77,12 @@ export const CreateConnection = () => {
         })
       },
     })
+  }
+
+  function setGeneratedPassword(pwd: string) {
+    setOpenModal(false)
+    setVisibily(true)
+    return form.setValue('password', pwd)
   }
 
   return (
@@ -144,7 +158,7 @@ export const CreateConnection = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <div className='relative flex items-center'>
+                    <div className='relative flex items-center gap-2'>
                       <Input
                         {...field}
                         value={field.value}
@@ -155,20 +169,38 @@ export const CreateConnection = () => {
                       {field.value !== '' ? (
                         visibility ? (
                           <EyeOff
-                            className='absolute right-4 cursor-pointer text-muted-foreground'
+                            className='absolute right-16 cursor-pointer text-muted-foreground'
                             onClick={() => {
                               setVisibily(!visibility)
                             }}
                           />
                         ) : (
                           <Eye
-                            className='absolute right-4 cursor-pointer text-muted-foreground'
+                            className='absolute right-16 cursor-pointer text-muted-foreground'
                             onClick={() => {
                               setVisibily(!visibility)
                             }}
                           />
                         )
                       ) : null}
+
+                      <TooltipProvider delayDuration={100}>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              type='button'
+                              variant='outline'
+                              size='icon'
+                              onClick={() => setOpenModal(true)}
+                            >
+                              <Cog className='text-muted-foreground' />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side='bottom'>
+                            <p>Generate password</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -182,6 +214,12 @@ export const CreateConnection = () => {
           </form>
         </Form>
       </div>
+
+      <PasswordGenerationModal
+        open={openModal}
+        setOpen={setOpenModal}
+        setGeneratedPassword={setGeneratedPassword}
+      />
     </div>
   )
 }
