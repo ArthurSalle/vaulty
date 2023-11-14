@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -112,7 +113,7 @@ export const CreateConnection = () => {
                 <FormItem>
                   <FormLabel>Connection name</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder='Alan' />
+                    <Input {...field} placeholder='Stack Overflow' />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -126,8 +127,15 @@ export const CreateConnection = () => {
                 <FormItem>
                   <FormLabel>Website</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder='https://alan.com/' />
+                    <Input
+                      {...field}
+                      placeholder='https://stackoverflow.com/'
+                    />
                   </FormControl>
+                  <FormDescription>
+                    No URL? Try this one:&nbsp; <br className='md:hidden' />
+                    <i>https://stackoverflow.com/</i>
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -143,7 +151,7 @@ export const CreateConnection = () => {
                     <Input
                       {...field}
                       value={field.value}
-                      placeholder='johndoe'
+                      placeholder='john.doe@mail.io'
                     />
                   </FormControl>
                   <FormMessage />

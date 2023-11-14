@@ -105,9 +105,11 @@ export const ConnectionList = () => {
                           })}
                         </AvatarFallback>
                       </Avatar>
-                      <div className='ml-3 space-y-1 block overflow-x-hidden'>
-                        <p className='text-sm font-medium leading-none truncate'>
-                          {capitalizeFirstLetter(connection.connection_name)}
+                      <div className='ml-3 block overflow-x-hidden'>
+                        <p className='text-sm font-medium truncate'>
+                          {connection.connection_name?.split(' ').map((el) => {
+                            return capitalizeFirstLetter(el) + ' '
+                          })}
                         </p>
                         <p className='text-sm text-muted-foreground'>
                           {connection.username && connection.username}

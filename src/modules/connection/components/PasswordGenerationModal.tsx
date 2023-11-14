@@ -102,10 +102,10 @@ export const PasswordGenerationModal = ({
 
   return (
     <Dialog open={open} onOpenChange={setOpen} modal>
-      <DialogContent className='sm:max-w-md'>
+      <DialogContent className='sm:max-w-md w-full'>
         <DialogHeader>
           <DialogTitle className='flex items-center gap-2'>
-            <span className=' text-xl'>Generate a custom password</span>
+            <span className='text-xl'>Generate a password</span>
             <Cog size={20} strokeWidth={2.3} className='' />
           </DialogTitle>
         </DialogHeader>
