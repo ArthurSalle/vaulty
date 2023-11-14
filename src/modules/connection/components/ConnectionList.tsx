@@ -86,7 +86,7 @@ export const ConnectionList = () => {
                           `${buttonVariants({
                             variant: 'ghost',
                           })} h-full w-full justify-start p-3 rounded-none`,
-                          isActive ? '' : ''
+                          isActive ? 'bg-muted' : ''
                         )
                       }
                     >

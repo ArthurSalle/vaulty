@@ -118,7 +118,7 @@ export const EditIdentity = () => {
               src={identity.avatar}
               alt={`${identity.firstname} avatar`}
             />
-            <AvatarFallback>
+            <AvatarFallback className='text-2xl font-medium'>
               {getFirstLetterCapitalized(identity.firstname) +
                 getFirstLetterCapitalized(identity.lastname)}
             </AvatarFallback>

@@ -14,6 +14,10 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { useState } from 'react'
 import { DeleteConnection } from './DeleteConnection'
+import {
+  capitalizeFirstLetter,
+  getFirstLetterCapitalized,
+} from '@/modules/shared/lib/utils'
 
 export const ConnectionLoader: LoaderFunction = ({ params }) => {
   const connection = getConnection(params.connectionId!)
@@ -25,7 +29,6 @@ export const ConnectionLoader: LoaderFunction = ({ params }) => {
 
 export async function action({ request }: ActionFunctionArgs) {
   const data = (await request.json()) as { connectionId: string }
-  console.log('data', data)
   return redirect(`/connection/${data.connectionId}`)
 }
 
@@ -80,11 +83,17 @@ export const ConnectionPage = () => {
                   }
                   alt={`${connection.connection_name} logo`}
                 />
-                <AvatarFallback></AvatarFallback>
+                <AvatarFallback className='text-2xl font-medium'>
+                  {connection.connection_name?.split(' ').map((el) => {
+                    return getFirstLetterCapitalized(el)
+                  })}
+                </AvatarFallback>
               </Avatar>
               <div>
                 <h1 className='text-2xl font-medium'>
-                  {connection.connection_name}
+                  {connection.connection_name?.split(' ').map((el) => {
+                    return capitalizeFirstLetter(el) + ' '
+                  })}
                 </h1>
               </div>
             </div>
@@ -105,10 +114,10 @@ export const ConnectionPage = () => {
             </div>
           </div>
 
-          <div className='flex flex-col gap-2 lg:gap-4 md:mt-6 lg:mt-12 mx-auto max-w-xl w-full '>
+          <div className='flex flex-col gap-2 lg:gap-4 md:mt-6 lg:mt-12 mx-auto max-w-xl w-full'>
             <div className='flex flex-col gap-2'>
               <div className='w-full'>
-                <Label>Username</Label>
+                <Label>Username/Email</Label>
                 <Input
                   value={connection.username}
                   readOnly
