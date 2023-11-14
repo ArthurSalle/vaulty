@@ -12,7 +12,7 @@ import { Connection } from '../helpers/create-connection'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DeleteConnection } from './DeleteConnection'
 import {
   capitalizeFirstLetter,
@@ -34,9 +34,12 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export const ConnectionPage = () => {
   const connection = useLoaderData() as Connection
-  // const { connectionId } = useParams()
   const [visibility, setVisibily] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false)
+
+  useEffect(() => {
+    setVisibily(false)
+  }, [connection])
 
   return (
     <div className='bg-white h-[calc(100dvh-53px)] md:h-screen overflow-y-auto absolute inset-0 md:relative'>
