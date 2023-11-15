@@ -71,8 +71,6 @@ export function deleteConnection(
     (connection: Connection) => connection.id === id
   )
 
-  console.log(connectionToDeleteIndex)
-
   if (connectionToDeleteIndex !== -1) {
     if (storage.splice(connectionToDeleteIndex, 1)) {
       localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(storage))
