@@ -3,7 +3,14 @@ import { buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { Plus, X } from 'lucide-react'
-import { Link, NavLink, Outlet, useLoaderData } from 'react-router-dom'
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom'
 import { Identity } from '../helpers/create-identity'
 import { getIdentities } from '../storage/storage'
 import {
@@ -17,7 +24,6 @@ import { ChangeEvent, useEffect, useState } from 'react'
 
 export function IdentitiesLoader() {
   let identities = getIdentities()
-
   return identities
 }
 
@@ -25,6 +31,8 @@ export const IdentityList = () => {
   const identities = useLoaderData() as Identity[]
   const [search, setSearch] = useState('')
   const [searchResults, setSearchResults] = useState<Identity[]>([])
+  const navigate = useNavigate()
+  const location = useLocation()
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value)
@@ -42,6 +50,18 @@ export const IdentityList = () => {
 
     setSearchResults(results)
   }, [search, identities])
+
+  useEffect(() => {
+    const firstIdentity = identities[0]
+    if (
+      firstIdentity &&
+      (location.pathname === '/identity' || location.pathname === '/identity/')
+    ) {
+      navigate(`/identity/${firstIdentity.id}`, {
+        replace: true,
+      })
+    }
+  }, [identities, location])
 
   return (
     <div className='flex w-full h-[100dvh] relative'>

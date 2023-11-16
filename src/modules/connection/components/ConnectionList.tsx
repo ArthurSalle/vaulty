@@ -62,8 +62,6 @@ export const ConnectionList = () => {
     }
   }, [connections, location])
 
-  //usepathname si /:id ne m'as afficher la liste
-
   return (
     <div className='flex w-full h-[100dvh] relative'>
       <div className='flex flex-col pt-4 w-full md:max-w-[250px] lg:max-w-xs max-h-[calc(100dvh-53px)] md:max-h-[100dvh] border-r flex-shrink-0'>
