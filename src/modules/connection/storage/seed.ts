@@ -6,25 +6,25 @@ const passwords = [
     connection_name: 'Notion',
     website: 'https://www.notion.so/',
     username: 'john.doe@mail.io',
-    password: '5678765',
+    password: 'Us^Qyrf*dbzg#',
   }),
   createConnection({
     connection_name: 'Alan',
     website: 'https://alan.com/',
     username: 'johndoe',
-    password: '1234321',
+    password: '257107',
   }),
   createConnection({
     connection_name: 'Figma',
     website: 'https://figma.com/',
     username: 'john.doe@mail.io',
-    password: '4321234',
+    password: '@LDpNf%E',
   }),
   createConnection({
     connection_name: 'Discord',
     website: 'https://discord.com/',
     username: 'doejohn',
-    password: '9876789',
+    password: '^YeI5ZFJJ',
   }),
 ]
 

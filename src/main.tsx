@@ -45,6 +45,7 @@ import {
   EditConnection,
   action as EditConnectionIdAction,
 } from './modules/connection/components/EditConnection'
+import { Vaulty } from './routes/vaulty'
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Connection /> },
+      { index: true, element: <Vaulty /> },
       {
         path: '/connection',
         element: <Connection />,
@@ -67,21 +68,22 @@ const router = createBrowserRouter([
               return true
             },
             children: [
+              // {
+              //   path: '',
+              //   index: true,
+              //   element: <ConnectionHome />,
+              // },
               {
-                path: '',
+                path: ':connectionId',
                 index: true,
-                element: <ConnectionHome />,
+                element: <ConnectionPage />,
+                loader: ConnectionLoader,
+                action: ConnectionIdAction,
               },
               {
                 path: 'new',
                 element: <CreateConnection />,
                 action: ConnectionAction,
-              },
-              {
-                path: ':connectionId',
-                element: <ConnectionPage />,
-                loader: ConnectionLoader,
-                action: ConnectionIdAction,
               },
               {
                 path: ':connectionId/edit',

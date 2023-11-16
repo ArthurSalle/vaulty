@@ -14,7 +14,7 @@ export const ConnectionHome = () => {
       </h1>
 
       <div className='bg-white w-full flex flex-col px-8 py-4 mt-8 lg:mt-14 justify-center items-center xl:max-w-4xl mx-auto'>
-        <h2 className='text-4xl font-bold leading-tight pb-8 lg:pb-4 lg:pt-8 text-center [text-wrap:balance]'>
+        <h2 className='text-4xl font-bold leading-tight pb-8 lg:pb-4 lg:pt-8 lg:px-16 text-center [text-wrap:balance]'>
           Store all your&nbsp;
           <span className='px-2 rounded-[2px] bg-gradient-to-r from-red-400 to-amber-400'>
             connections

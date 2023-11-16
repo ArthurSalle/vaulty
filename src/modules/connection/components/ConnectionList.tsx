@@ -1,7 +1,14 @@
 import { buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Plus, X } from 'lucide-react'
-import { Link, NavLink, Outlet, useLoaderData } from 'react-router-dom'
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom'
 import { getConnections } from '../storage/storage'
 import { Connection } from '../helpers/create-connection'
 import {
@@ -22,6 +29,8 @@ export const ConnectionList = () => {
   const connections = useLoaderData() as Connection[]
   const [search, setSearch] = useState('')
   const [searchResults, setSearchResults] = useState<Connection[]>([])
+  const navigate = useNavigate()
+  const location = useLocation()
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value)
@@ -39,6 +48,19 @@ export const ConnectionList = () => {
 
     setSearchResults(results)
   }, [search, connections])
+
+  useEffect(() => {
+    const firstConnection = connections[0]
+    if (
+      firstConnection &&
+      (location.pathname === '/connection' ||
+        location.pathname === '/connection/')
+    ) {
+      navigate(`/connection/${firstConnection.id}`, {
+        replace: true,
+      })
+    }
+  }, [connections, location])
 
   //usepathname si /:id ne m'as afficher la liste
 
