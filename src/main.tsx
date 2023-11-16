@@ -25,8 +25,6 @@ import {
   EditIdentity,
   action as EditIdentityIdAction,
 } from './modules/identity/components/EditIdentity'
-import { IdentityHome } from './modules/identity/components/IdentityHome'
-import { ConnectionHome } from './modules/connection/components/ConnectionHome'
 import { WalletHome } from './modules/wallet/components/WalletHome'
 import {
   ConnectionsLoader,
@@ -119,13 +117,14 @@ const router = createBrowserRouter([
               return true
             },
             children: [
-              {
-                path: '',
-                index: true,
-                element: <IdentityHome />,
-              },
+              // {
+              //   path: '',
+              //   index: true,
+              //   element: <IdentityHome />,
+              // },
               {
                 path: ':identityId',
+                index: true,
                 element: <IdentityPage />,
                 loader: IdentityLoader,
                 action: IdentityIdAction,
