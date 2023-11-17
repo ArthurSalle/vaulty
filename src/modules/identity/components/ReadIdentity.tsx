@@ -4,7 +4,6 @@ import {
   NavLink,
   redirect,
   useLoaderData,
-  useParams,
   useSubmit,
 } from 'react-router-dom'
 import { getIdentity, saveAsDefaultIdentity } from '../storage/storage'
@@ -39,7 +38,7 @@ import {
 import { useEffect, useState } from 'react'
 import { DeleteIdentity } from './DeleteIdentity'
 
-export const IdentityLoader: LoaderFunction = ({ params }) => {
+export const identityLoader: LoaderFunction = ({ params }) => {
   const identity = getIdentity(params.identityId!)
 
   if (!identity) {
@@ -49,16 +48,20 @@ export const IdentityLoader: LoaderFunction = ({ params }) => {
   return identity
 }
 
-export async function action({ request }: ActionFunctionArgs) {
-  const data = (await request.json()) as { identityId: string }
-  return redirect(`/identity/${data.identityId}`)
+export async function identityAction({ request }: ActionFunctionArgs) {
+  const json = await request.json()
+  const identityId = json.id
+  return redirect(`/identity/${identityId}`)
 }
 
-export const IdentityPage = () => {
+export const ReadIdentity = () => {
   const identity = useLoaderData() as Identity
-  const { identityId } = useParams()
-  const submit = useSubmit()
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const onEditSubmit = useSubmit()
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
+
+  function openDeleteModal() {
+    setDeleteModalOpen(true)
+  }
 
   const form = useForm<DefaultIdentitySchema>({
     resolver: zodResolver(defaultIdentitySchema),
@@ -70,18 +73,18 @@ export const IdentityPage = () => {
   }, [identity.default_identity])
 
   function onSubmit(value: DefaultIdentitySchema) {
-    saveAsDefaultIdentity(value, identityId!, {
+    saveAsDefaultIdentity(value, identity.id, {
       onSet: (identityId) => {
         toast({
           title: 'Set successfully! 🥳',
           description:
             'This identity was set as default for filling contact details.',
-          duration: 2500,
         })
-        submit(
+        onEditSubmit(
           { identityId },
           {
             method: 'post',
+            action: `/identity/${identityId}`,
             encType: 'application/json',
           }
         )
@@ -90,9 +93,8 @@ export const IdentityPage = () => {
         toast({
           title: 'Unset!',
           description: 'This identity is no longer set as default.',
-          duration: 2500,
         })
-        submit(
+        onEditSubmit(
           { identityId },
           {
             method: 'post',
@@ -125,11 +127,7 @@ export const IdentityPage = () => {
           >
             <Edit className='h-5' />
           </NavLink>
-          <Button
-            variant='outline'
-            size='icon'
-            onClick={() => setIsOpenModal(true)}
-          >
+          <Button variant='outline' size='icon' onClick={openDeleteModal}>
             <Trash2 className='h-5 text-customred' />
           </Button>
         </div>
@@ -167,11 +165,7 @@ export const IdentityPage = () => {
               >
                 <Edit className='h-5' />
               </NavLink>
-              <Button
-                variant='outline'
-                size='icon'
-                onClick={() => setIsOpenModal(true)}
-              >
+              <Button variant='outline' size='icon' onClick={openDeleteModal}>
                 <Trash2 className='h-5 text-customred' />
               </Button>
             </div>
@@ -182,13 +176,13 @@ export const IdentityPage = () => {
               <div className='w-full'>
                 <Label>Phone number</Label>
                 <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-                  {identity.phone && formatPhoneNumber(identity.phone)}
+                  {identity.phone ? formatPhoneNumber(identity.phone) : null}
                 </span>
               </div>
               <div className='w-full'>
                 <Label>Mail</Label>
                 <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-                  {identity.mail && identity.mail}
+                  {identity.mail}
                 </span>
               </div>
             </div>
@@ -197,21 +191,21 @@ export const IdentityPage = () => {
               <div className='w-full'>
                 <Label>Birth date</Label>
                 <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-                  {identity.date && formatDate(identity.date)}
+                  {identity.date ? formatDate(identity.date) : null}
                 </span>
               </div>
 
               <div className='w-full'>
                 <Label>Genre</Label>
                 <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-                  {identity.genre && identity.genre}
+                  {identity.genre}
                 </span>
               </div>
 
               <div className='w-full'>
                 <Label>Relation</Label>
                 <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-                  {identity.relation && identity.relation}
+                  {identity.relation}
                 </span>
               </div>
             </div>
@@ -250,8 +244,8 @@ export const IdentityPage = () => {
       </div>
 
       <DeleteIdentity
-        isOpen={isOpenModal}
-        setIsOpen={setIsOpenModal}
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setDeleteModalOpen}
         identity={identity}
       />
     </div>

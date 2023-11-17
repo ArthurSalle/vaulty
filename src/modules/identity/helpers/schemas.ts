@@ -1,13 +1,5 @@
 import { z } from 'zod'
 
-export const avatarUrl = [
-  'https://api.dicebear.com/7.x/notionists/svg?seed=Smokey',
-  'https://api.dicebear.com/7.x/notionists/svg?seed=Mimi',
-  'https://api.dicebear.com/7.x/notionists/svg?seed=Sasha',
-  'https://api.dicebear.com/7.x/notionists/svg?seed=Molly',
-  'https://api.dicebear.com/7.x/notionists/svg?seed=Ginger',
-] as const
-
 export const identitySchema = z.object({
   firstname: z.string().min(2, {
     message: 'Firstname must be at least 2 characters.',

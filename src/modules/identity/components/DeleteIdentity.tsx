@@ -13,10 +13,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { Identity } from '../helpers/create-identity'
 import { deleteIdentity } from '../storage/storage'
 import { toast } from '@/components/ui/use-toast'
-import {
-  useRevalidator,
-  // useSubmit
-} from 'react-router-dom'
+import { useSubmit } from 'react-router-dom'
 
 type PropsType = {
   isOpen: boolean
@@ -25,25 +22,25 @@ type PropsType = {
 }
 
 export const DeleteIdentity = ({ isOpen, setIsOpen, identity }: PropsType) => {
-  // const submit = useSubmit()
-  const revalidator = useRevalidator()
+  const submit = useSubmit()
 
-  function handleClick() {
+  function handleDelete() {
     deleteIdentity(identity.id, {
       onSuccess() {
         toast({
           title: 'The identity has been permantely deleted! 🥳',
           description: 'Browse your list or create a new identity.',
-          duration: 2500,
         })
         setIsOpen(false)
-        revalidator.revalidate()
+
+        submit({
+          method: 'get',
+        })
       },
       onError() {
         toast({
           title: 'Something went wrong... 🫠',
           description: 'Please try again.',
-          duration: 2500,
         })
       },
     })
@@ -74,7 +71,7 @@ export const DeleteIdentity = ({ isOpen, setIsOpen, identity }: PropsType) => {
             </Button>
           </DialogClose>
 
-          <Button onClick={handleClick}>Delete Identity</Button>
+          <Button onClick={handleDelete}>Delete Identity</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

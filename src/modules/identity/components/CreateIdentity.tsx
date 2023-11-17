@@ -41,9 +41,10 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-export async function action({ request }: ActionFunctionArgs) {
-  const data = (await request.json()) as { id: string }
-  return redirect(`/identity/${data.id}`)
+export async function createIdentityAction({ request }: ActionFunctionArgs) {
+  const json = await request.json()
+  const identityId = json.id as { id: string }
+  return redirect(`/identity/${identityId}`)
 }
 
 export const CreateIdentity = () => {
@@ -58,7 +59,7 @@ export const CreateIdentity = () => {
     },
   })
 
-  const submit = useSubmit()
+  const onCreateSubmit = useSubmit()
 
   function onSubmit(values: IdentitySchema) {
     saveIdentity(values, {
@@ -66,10 +67,9 @@ export const CreateIdentity = () => {
         toast({
           title: 'The identity has been successfully created! 🥳',
           description: 'Check it out.',
-          duration: 2500,
         })
 
-        submit(
+        onCreateSubmit(
           { id },
           {
             method: 'post',
@@ -82,7 +82,6 @@ export const CreateIdentity = () => {
         toast({
           title: 'This identity already exists! 😬',
           description: 'Please edit the existing identity.',
-          duration: 2500,
         })
       },
     })

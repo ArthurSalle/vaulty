@@ -45,13 +45,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { saveEditedIdentity } from '../storage/storage'
 import { toast } from '@/components/ui/use-toast'
 
-export async function action({ request }: ActionFunctionArgs) {
-  const data = (await request.json()) as { id: string }
-  return redirect(`/identity/${data.id}`)
+export async function editIdentityAction({ request }: ActionFunctionArgs) {
+  const json = await request.json()
+  const identityId = json.id
+  return redirect(`/identity/${identityId}`)
 }
 export const EditIdentity = () => {
   const identity = useLoaderData() as Identity
-  const submit = useSubmit()
+  const onEditSubmit = useSubmit()
 
   const form = useForm<Identity>({
     resolver: zodResolver(identitySchema),
@@ -69,35 +70,33 @@ export const EditIdentity = () => {
 
   function onSubmit(value: Identity) {
     const id = identity.id
-    const formattedValue = { ...value, id }
-    saveEditedIdentity(formattedValue, {
+    const formattedIdentity = { ...value, id }
+    saveEditedIdentity(formattedIdentity, {
       onSuccess(id) {
         toast({
           title: 'The identity has been successfully updated! 🥳',
           description: 'Check it out.',
-          duration: 2500,
         })
 
-        submit(
+        onEditSubmit(
           { id },
           {
             method: 'post',
+            action: `/identity/${id}/edit`,
             encType: 'application/json',
           }
         )
       },
-      onError(errorDetail) {
-        if (errorDetail === 'no modifications') {
+      onError(errorMsg) {
+        if (errorMsg === 'no modifications') {
           toast({
             title: 'No changes made! 🤔',
             description: 'Feel free to change the identity details.',
-            duration: 2500,
           })
         } else {
           toast({
             title: 'Something went wrong... 🫠',
             description: 'Please try again.',
-            duration: 2500,
           })
         }
       },

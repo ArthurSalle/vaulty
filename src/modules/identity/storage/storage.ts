@@ -4,26 +4,27 @@ import { DefaultIdentitySchema, IdentitySchema } from '../helpers/schemas'
 import { seedIdentities } from './seed'
 
 export function getIdentities() {
-  const storage = localStorage.getItem(IDENTITY_STORAGE_KEY)
+  const identities = localStorage.getItem(IDENTITY_STORAGE_KEY)
 
-  if (!storage) {
+  if (!identities) {
     seedIdentities()
     return getIdentities()
   }
 
-  let formattedStorage = JSON.parse(storage!)
+  const parsedIdentities = JSON.parse(identities!) as Identity[]
 
-  formattedStorage = formattedStorage.sort(
-    (a: any, b: any) => b.default_identity - a.default_identity
+  const sortedIdentities = parsedIdentities.sort(
+    //@ts-ignore
+    (a, b) => b.default_identity - a.default_identity
   )
 
-  return formattedStorage as Identity[]
+  return sortedIdentities
 }
 
 export function getIdentity(id: string) {
-  const storage = getIdentities()
+  const identities = getIdentities()
 
-  return storage.find((identity) => identity.id === id)
+  return identities.find((identity) => identity.id === id)
 }
 
 export function saveIdentity(
@@ -34,28 +35,14 @@ export function saveIdentity(
   }: { onSuccess: (id: string) => void; onError: () => void }
 ) {
   const formatedIdentity = createIdentity(value)
-  let storage = getIdentities()
+  const identities = getIdentities() || []
 
-  if (!storage) {
-    storage = []
-    storage.push(formatedIdentity)
-    localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(storage))
+  if (identities.push(formatedIdentity)) {
+    localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(identities))
     return onSuccess(formatedIdentity.id)
-  }
-
-  const existingId = storage.some(
-    (identity) =>
-      identity.firstname === formatedIdentity.firstname &&
-      identity.lastname === formatedIdentity.lastname
-  )
-
-  if (existingId) {
+  } else {
     return onError()
   }
-
-  storage.push(formatedIdentity)
-  localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(storage))
-  return onSuccess(formatedIdentity.id)
 }
 
 export function saveAsDefaultIdentity(
@@ -84,6 +71,7 @@ export function saveAsDefaultIdentity(
 
   localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(updatedIdentities))
   getIdentities()
+
   if (value.default_identity) {
     return onSet(id)
   } else return onUnset(id)
@@ -96,28 +84,28 @@ export function saveEditedIdentity(
     onError,
   }: { onSuccess: (id: string) => void; onError: (errorDetail: string) => void }
 ) {
-  const storage = localStorage.getItem(IDENTITY_STORAGE_KEY)
-  let formattedStorage = JSON.parse(storage!)
+  const identities = localStorage.getItem(IDENTITY_STORAGE_KEY)
+  let parsedIdentities = JSON.parse(identities!)
 
-  const oldIdentityIndex = formattedStorage.findIndex(
+  const oldIdentityIndex = parsedIdentities.findIndex(
     (identity: Identity) => identity.id === value.id
   )
 
   if (oldIdentityIndex !== -1) {
-    const oldObject = formattedStorage[oldIdentityIndex]
+    const oldObject = parsedIdentities[oldIdentityIndex]
 
     const areObjectsIdentical =
       JSON.stringify(oldObject) === JSON.stringify(value)
 
     if (!areObjectsIdentical) {
       const updatedObject = { ...oldObject, ...value }
-      formattedStorage[oldIdentityIndex] = updatedObject
+      parsedIdentities[oldIdentityIndex] = updatedObject
     } else {
       return onError('no modifications')
     }
   }
 
-  localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(formattedStorage))
+  localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(parsedIdentities))
 
   if (onSuccess) {
     onSuccess(value.id)
@@ -136,16 +124,15 @@ export function deleteIdentity(
     onError: () => void
   }
 ) {
-  const storage = JSON.parse(localStorage.getItem(IDENTITY_STORAGE_KEY)!)
+  const identities = JSON.parse(localStorage.getItem(IDENTITY_STORAGE_KEY)!)
 
-  const identityToDeleteIndex = storage.findIndex(
+  const identityToDeleteIndex = identities.findIndex(
     (identity: Identity) => identity.id === id
   )
 
   if (identityToDeleteIndex !== -1) {
-    if (storage.splice(identityToDeleteIndex, 1)) {
-      localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(storage))
-      return onSuccess()
-    } else return onError()
+    identities.splice(identityToDeleteIndex, 1)
+    localStorage.setItem(IDENTITY_STORAGE_KEY, JSON.stringify(identities))
+    return onSuccess()
   } else return onError()
 }
