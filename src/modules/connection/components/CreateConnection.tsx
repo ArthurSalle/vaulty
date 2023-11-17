@@ -30,13 +30,15 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 
-export async function action({ request }: ActionFunctionArgs) {
-  const data = (await request.json()) as { id: string }
-  return redirect(`/connection/${data.id}`)
+export async function createConnectionAction({ request }: ActionFunctionArgs) {
+  const json = await request.json()
+  const connectionId = json.id as { id: string }
+
+  return redirect(`/connection/${connectionId}`)
 }
 
 export const CreateConnection = () => {
-  const submit = useSubmit()
+  const onCreateSubmit = useSubmit()
   const [visibility, setVisibily] = useState(false)
   const [openModal, setOpenModal] = useState(false)
 
@@ -56,10 +58,9 @@ export const CreateConnection = () => {
         toast({
           title: 'The connection has been successfully created! 🥳',
           description: 'Check it out.',
-          duration: 2500,
         })
 
-        submit(
+        onCreateSubmit(
           {
             id,
           },
@@ -74,7 +75,6 @@ export const CreateConnection = () => {
         toast({
           title: 'Oops! Something went wrong 🫠',
           description: 'Please try again.',
-          duration: 2500,
         })
       },
     })

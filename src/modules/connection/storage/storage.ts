@@ -4,26 +4,26 @@ import { ConnectionSchema } from '../helpers/schemas'
 import { seedConnections } from './seed'
 
 export function getConnections() {
-  const storage = localStorage.getItem(CONNECTION_STORAGE_KEY)
+  const connections = localStorage.getItem(CONNECTION_STORAGE_KEY)
 
-  if (!storage) {
+  if (!connections) {
     seedConnections()
     return getConnections()
   }
 
-  const rawStorage = JSON.parse(storage!) as Connection[]
+  const parsedConnections = JSON.parse(connections!) as Connection[]
 
-  const formattedStorage = rawStorage.sort((a, b) =>
+  const sortedConnections = parsedConnections.sort((a, b) =>
     a.connection_name.localeCompare(b.connection_name)
   )
 
-  return formattedStorage
+  return sortedConnections
 }
 
 export function getConnection(id: string) {
-  const storage = getConnections()
+  const connections = getConnections()
 
-  return storage.find((connection) => connection.id === id)
+  return connections.find((connection) => connection.id === id)
 }
 
 export function saveConnection(
@@ -37,22 +37,14 @@ export function saveConnection(
   }
 ) {
   const formattedConnection = createConnection(value)
+  const connections = getConnections() || []
 
-  let storage = getConnections()
-
-  if (!storage) {
-    storage = []
-    storage.push(formattedConnection)
-    localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(storage))
+  if (connections.push(formattedConnection)) {
+    localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(connections))
     return onSuccess(formattedConnection.id)
-  }
-
-  if (!storage.push(formattedConnection)) {
+  } else {
     return onError()
   }
-
-  localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(storage))
-  return onSuccess(formattedConnection.id)
 }
 
 export function deleteConnection(
@@ -65,18 +57,19 @@ export function deleteConnection(
     onError: () => void
   }
 ) {
-  const storage = getConnections()
+  const connections = getConnections()
 
-  const connectionToDeleteIndex = storage.findIndex(
-    (connection: Connection) => connection.id === id
+  const connectionToDeleteIndex = connections.findIndex(
+    (connection) => connection.id === id
   )
 
-  if (connectionToDeleteIndex !== -1) {
-    if (storage.splice(connectionToDeleteIndex, 1)) {
-      localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(storage))
-      return onSuccess()
-    } else return onError()
-  } else return onError()
+  if (connectionToDeleteIndex === -1) {
+    return onError()
+  }
+
+  connections.splice(connectionToDeleteIndex, 1)
+  localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(connections))
+  return onSuccess()
 }
 
 export function saveEditedConnection(
@@ -89,23 +82,25 @@ export function saveEditedConnection(
     onError: () => void
   }
 ) {
-  const storage = getConnections()
+  const connections = getConnections()
 
-  const oldConnectionIndex = storage.findIndex(
+  const oldConnectionIndex = connections.findIndex(
     (connection: Connection) => connection.id === value.id
   )
 
   if (oldConnectionIndex !== -1) {
-    const oldObject = storage[oldConnectionIndex]
+    const oldObject = connections[oldConnectionIndex]
     const updatedObject = { ...oldObject, ...value }
-    storage[oldConnectionIndex] = updatedObject
-  } else return onError()
+    connections[oldConnectionIndex] = updatedObject
+  } else {
+    return onError()
+  }
 
-  localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(storage))
+  localStorage.setItem(CONNECTION_STORAGE_KEY, JSON.stringify(connections))
 
   if (onSuccess) {
-    onSuccess(value.id)
+    return onSuccess(value.id)
   } else {
-    onError()
+    return onError()
   }
 }

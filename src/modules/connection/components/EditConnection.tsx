@@ -36,16 +36,17 @@ import {
 } from '@/components/ui/tooltip'
 import { PasswordGenerationModal } from './PasswordGenerationModal'
 
-export async function action({ request }: ActionFunctionArgs) {
-  const data = (await request.json()) as { id: string }
-  return redirect(`/connection/${data.id}`)
+export async function editConnectionAction({ request }: ActionFunctionArgs) {
+  const json = await request.json()
+  const connectionId = json.id as { id: string }
+  return redirect(`/connection/${connectionId}`)
 }
 
 export const EditConnection = () => {
   const connection = useLoaderData() as Connection
   const [visibility, setVisibily] = useState(false)
   const [openModal, setOpenModal] = useState(false)
-  const submit = useSubmit()
+  const onEditSubmit = useSubmit()
 
   const form = useForm<Connection>({
     resolver: zodResolver(connectionSchema),
@@ -66,13 +67,13 @@ export const EditConnection = () => {
         toast({
           title: 'The connection has been successfully updated! 🥳',
           description: 'Check it out.',
-          duration: 2500,
         })
 
-        submit(
+        onEditSubmit(
           { id },
           {
             method: 'post',
+            action: `/connection/${id}/edit`,
             encType: 'application/json',
           }
         )
@@ -81,7 +82,6 @@ export const EditConnection = () => {
         toast({
           title: 'Something went wrong... 🫠',
           description: 'Please try again.',
-          duration: 2500,
         })
       },
     })

@@ -13,7 +13,7 @@ import { Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { deleteConnection } from '../storage/storage'
 import { toast } from '@/components/ui/use-toast'
-import { useRevalidator } from 'react-router-dom'
+import { useSubmit } from 'react-router-dom'
 
 type PropsType = {
   isOpen: boolean
@@ -26,7 +26,7 @@ export const DeleteConnection = ({
   setIsOpen,
   connection,
 }: PropsType) => {
-  const revalidator = useRevalidator()
+  const onDeleteSubmit = useSubmit()
 
   function handleClick() {
     deleteConnection(connection.id, {
@@ -34,16 +34,17 @@ export const DeleteConnection = ({
         toast({
           title: 'The connection has been permantely deleted! 🥳',
           description: 'Browse your list or create a new connection.',
-          duration: 2500,
         })
         setIsOpen(false)
-        revalidator.revalidate()
+
+        onDeleteSubmit({
+          method: 'get',
+        })
       },
       onError() {
         toast({
           title: 'Something went wrong... 🫠',
           description: 'Please try again.',
-          duration: 2500,
         })
       },
     })

@@ -19,23 +19,29 @@ import {
   getFirstLetterCapitalized,
 } from '@/modules/shared/lib/utils'
 
-export const ConnectionLoader: LoaderFunction = ({ params }) => {
+export const connectionLoader: LoaderFunction = ({ params }) => {
   const connection = getConnection(params.connectionId!)
   if (!connection) {
-    return redirect('/connection')
+    return redirect('/connection/new')
   }
   return connection
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const data = (await request.json()) as { connectionId: string }
-  return redirect(`/connection/${data.connectionId}`)
+  const json = await request.json()
+  const connectionId = json.id as { connectionId: string }
+
+  return redirect(`/connection/${connectionId}`)
 }
 
-export const ConnectionPage = () => {
+export const ReadConnection = () => {
   const connection = useLoaderData() as Connection
   const [visibility, setVisibily] = useState(false)
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
+
+  function openDeleteModal() {
+    setDeleteModalOpen(true)
+  }
 
   useEffect(() => {
     setVisibily(false)
@@ -63,11 +69,7 @@ export const ConnectionPage = () => {
           >
             <Edit className='h-5' />
           </NavLink>
-          <Button
-            variant='outline'
-            size='icon'
-            onClick={() => setIsOpenModal(true)}
-          >
+          <Button variant='outline' size='icon' onClick={openDeleteModal}>
             <Trash2 className='h-5 text-customred' />
           </Button>
         </div>
@@ -107,11 +109,7 @@ export const ConnectionPage = () => {
               >
                 <Edit className='h-5' />
               </NavLink>
-              <Button
-                variant='outline'
-                size='icon'
-                onClick={() => setIsOpenModal(true)}
-              >
+              <Button variant='outline' size='icon' onClick={openDeleteModal}>
                 <Trash2 className='h-5 text-customred' />
               </Button>
             </div>
@@ -171,8 +169,8 @@ export const ConnectionPage = () => {
       </div>
 
       <DeleteConnection
-        isOpen={isOpenModal}
-        setIsOpen={setIsOpenModal}
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setDeleteModalOpen}
         connection={connection}
       />
     </div>
