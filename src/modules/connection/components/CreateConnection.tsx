@@ -133,7 +133,8 @@ export const CreateConnection = () => {
                     />
                   </FormControl>
                   <FormDescription>
-                    No URL? Try this one:&nbsp; <br className='md:hidden' />
+                    No URL? Try this one:&nbsp;
+                    <br className='md:hidden' />
                     <i>https://stackoverflow.com/</i>
                   </FormDescription>
                   <FormMessage />

@@ -185,7 +185,8 @@ export const CreateIdentity = () => {
                     <Input placeholder='https://yourphoto.png' {...field} />
                   </FormControl>
                   <FormDescription>
-                    No URL? Try this one:&nbsp; <br className='md:hidden' />
+                    No URL? Try this one:&nbsp;
+                    <br className='md:hidden' />
                     <i>
                       https://api.dicebear.com/7.x/notionists/svg?seed=Harley
                     </i>
