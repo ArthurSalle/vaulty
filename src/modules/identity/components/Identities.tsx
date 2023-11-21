@@ -6,10 +6,11 @@ import {
 } from 'react-router-dom'
 import { Identity } from '../helpers/create-identity'
 import { getIdentities } from '../storage/storage'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useDeferredValue, useEffect, useState } from 'react'
 import { filterIdentities } from '../helpers/helpers'
 import { SearchBar } from './SearchBar'
 import { IdentitiesList } from './IdentitiesList'
+import { useMediaQuery } from 'usehooks-ts'
 
 export function identitiesLoader() {
   return getIdentities()
@@ -18,35 +19,30 @@ export function identitiesLoader() {
 export const Identities = () => {
   const identities = useLoaderData() as Identity[]
   const [search, setSearch] = useState('')
-  const [searchResults, setSearchResults] = useState<Identity[]>(identities)
   const navigate = useNavigate()
   const location = useLocation()
+  const deferredSearch = useDeferredValue(search)
+  const isDesktop = useMediaQuery('(min-width: 768px)')
 
   function handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value)
-    setSearchResults(filterIdentities(event.target.value, identities))
   }
 
   function clearSearch() {
     setSearch('')
-    setSearchResults(identities)
   }
-
-  useEffect(() => {
-    setSearchResults(filterIdentities(search, identities))
-  }, [search, identities])
 
   useEffect(() => {
     const firstIdentity = identities[0]
     const matchLocationPathname =
       location.pathname === '/identity' || location.pathname === '/identity/'
 
-    if (firstIdentity && matchLocationPathname) {
+    if (isDesktop && firstIdentity && matchLocationPathname) {
       navigate(`/identity/${firstIdentity.id}`, {
         replace: true,
       })
     }
-  }, [identities, location])
+  }, [identities, location, isDesktop])
 
   return (
     <div className='flex w-full h-[100dvh] relative'>
@@ -57,7 +53,9 @@ export const Identities = () => {
           onClear={clearSearch}
         />
 
-        <IdentitiesList identities={searchResults} />
+        <IdentitiesList
+          identities={filterIdentities(deferredSearch, identities)}
+        />
       </div>
 
       <div className='w-full h-full min-h-[100dvh]'>

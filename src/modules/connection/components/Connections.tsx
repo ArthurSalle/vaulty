@@ -6,10 +6,11 @@ import {
 } from 'react-router-dom'
 import { getConnections } from '../storage/storage'
 import { Connection } from '../helpers/create-connection'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useDeferredValue, useEffect, useState } from 'react'
 import { filterConnections } from '../helpers/helpers'
 import { SearchBar } from './SearchBar'
 import { ConnectionsList } from './ConnectionsList'
+import { useMediaQuery } from 'usehooks-ts'
 
 export function connectionsLoader() {
   return getConnections()
@@ -18,23 +19,18 @@ export function connectionsLoader() {
 export const Connections = () => {
   const connections = useLoaderData() as Connection[]
   const [search, setSearch] = useState('')
-  const [searchResults, setSearchResults] = useState<Connection[]>(connections)
   const navigate = useNavigate()
   const location = useLocation()
+  const deferredSearch = useDeferredValue(search)
+  const isDesktop = useMediaQuery('(min-width: 768px)')
 
   function handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value)
-    setSearchResults(filterConnections(event.target.value, connections))
   }
 
   function clearSearch() {
     setSearch('')
-    setSearchResults(connections)
   }
-
-  useEffect(() => {
-    setSearchResults(filterConnections(search, connections))
-  }, [search, connections])
 
   useEffect(() => {
     const firstConnectionId = connections[0]?.id
@@ -42,12 +38,12 @@ export const Connections = () => {
       location.pathname === '/connection' ||
       location.pathname === '/connection/'
 
-    if (firstConnectionId && matchLocationPathname) {
+    if (isDesktop && firstConnectionId && matchLocationPathname) {
       navigate(`/connection/${firstConnectionId}`, {
         replace: true,
       })
     }
-  }, [connections, location])
+  }, [connections, location, isDesktop])
 
   return (
     <div className='flex w-full h-[100dvh] relative'>
@@ -58,7 +54,9 @@ export const Connections = () => {
           onClear={clearSearch}
         />
 
-        <ConnectionsList connectionsList={searchResults} />
+        <ConnectionsList
+          connectionsList={filterConnections(deferredSearch, connections)}
+        />
       </div>
 
       <div className='w-full h-full min-h-[100dvh]'>

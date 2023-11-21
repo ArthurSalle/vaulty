@@ -2,13 +2,14 @@ import { Toaster } from '../ui/toaster'
 import { NavDesktop, NavMobile } from '../../modules/shared/components/Nav'
 import { Outlet } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
+import { useMediaQuery } from 'usehooks-ts'
 
-// useMedia for render nav
 export default function Layout() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
+
   return (
     <div className='flex w-full h-full relative'>
-      <NavDesktop />
-      <NavMobile />
+      {isMobile ? <NavMobile /> : <NavDesktop />}
       <Outlet />
       <Toaster />
       <Analytics debug={false} />
