@@ -14,6 +14,7 @@ import { Identity } from '../helpers/create-identity'
 import { deleteIdentity } from '../storage/storage'
 import { toast } from '@/components/ui/use-toast'
 import { useSubmit } from 'react-router-dom'
+import { genericErrorToast } from '@/modules/shared/lib/utils'
 
 type PropsType = {
   isOpen: boolean
@@ -38,10 +39,7 @@ export const DeleteIdentity = ({ isOpen, setIsOpen, identity }: PropsType) => {
         })
       },
       onError() {
-        toast({
-          title: 'Something went wrong... 🫠',
-          description: 'Please try again.',
-        })
+        genericErrorToast()
       },
     })
   }

@@ -47,7 +47,7 @@ export function formatDate(date: Date) {
   return format(new Date(date), 'dd/MM/yyyy')
 }
 
-export function errorToast() {
+export function genericErrorToast() {
   return toast({
     title: 'Oops! Something went wrong 🫠',
     description: 'Please try again.',

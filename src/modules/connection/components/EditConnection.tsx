@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
   capitalizeFirstLetter,
-  errorToast,
+  genericErrorToast,
   getFirstLetterCapitalized,
 } from '@/modules/shared/lib/utils'
 import { Cog, Eye, EyeOff, X } from 'lucide-react'
@@ -80,7 +80,7 @@ export const EditConnection = () => {
         )
       },
       onError() {
-        errorToast()
+        genericErrorToast()
       },
     })
   }

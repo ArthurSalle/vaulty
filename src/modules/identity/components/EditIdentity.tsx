@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input'
 import {
   capitalizeFirstLetter,
   cn,
-  errorToast,
+  genericErrorToast,
   formatDate,
   getFirstLetterCapitalized,
   getRelationColor,
@@ -95,7 +95,7 @@ export const EditIdentity = () => {
             description: 'Feel free to change the identity details.',
           })
         } else {
-          errorToast()
+          genericErrorToast()
         }
       },
     })
