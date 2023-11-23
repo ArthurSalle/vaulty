@@ -29,6 +29,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { errorToast } from '@/modules/shared/lib/utils'
 
 export async function createConnectionAction({ request }: ActionFunctionArgs) {
   const json = await request.json()
@@ -72,10 +73,7 @@ export const CreateConnection = () => {
         )
       },
       onError() {
-        toast({
-          title: 'Oops! Something went wrong 🫠',
-          description: 'Please try again.',
-        })
+        errorToast()
       },
     })
   }

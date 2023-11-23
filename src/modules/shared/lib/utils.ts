@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import parsePhoneNumber from 'libphonenumber-js'
 import { format } from 'date-fns'
+import { toast } from '@/components/ui/use-toast'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -44,4 +45,11 @@ export function getRelationColor(relation: string) {
 
 export function formatDate(date: Date) {
   return format(new Date(date), 'dd/MM/yyyy')
+}
+
+export function errorToast() {
+  return toast({
+    title: 'Oops! Something went wrong 🫠',
+    description: 'Please try again.',
+  })
 }
