@@ -36,7 +36,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export const ReadConnection = () => {
   const connection = useLoaderData() as Connection
-  const [visibility, setVisibily] = useState(false)
+  const [visibility, setVisibility] = useState(false)
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
 
   function openDeleteModal() {
@@ -44,7 +44,7 @@ export const ReadConnection = () => {
   }
 
   useEffect(() => {
-    setVisibily(false)
+    setVisibility(false)
   }, [connection])
 
   return (
@@ -139,14 +139,14 @@ export const ReadConnection = () => {
                       <EyeOff
                         className='absolute right-4 mt-2 cursor-pointer text-muted-foreground'
                         onClick={() => {
-                          setVisibily(!visibility)
+                          setVisibility(!visibility)
                         }}
                       />
                     ) : (
                       <Eye
                         className='absolute right-4 mt-2 cursor-pointer text-muted-foreground'
                         onClick={() => {
-                          setVisibily(!visibility)
+                          setVisibility(!visibility)
                         }}
                       />
                     )
