@@ -18,7 +18,7 @@ import {
   EditConnection,
   editConnectionAction,
 } from '../modules/connection/components/EditConnection'
-import { WalletHome } from '../modules/wallet/components/WalletHome'
+import { Wallet, walletLoader } from '../modules/wallet/components/Wallet'
 import {
   Identities,
   identitiesLoader,
@@ -37,6 +37,10 @@ import {
   createIdentityAction,
 } from '../modules/identity/components/CreateIdentity'
 import { Settings } from './settings'
+import {
+  CreateCreditCard,
+  createCreditCardAction,
+} from '@/modules/wallet/components/CreateCreditCard'
 
 export const router = createBrowserRouter([
   {
@@ -84,7 +88,22 @@ export const router = createBrowserRouter([
         children: [
           {
             path: '',
-            element: <WalletHome />,
+            element: <Wallet />,
+            loader: walletLoader,
+            shouldRevalidate: (args) => {
+              return args.formMethod === 'post' || args.formMethod === 'get'
+            },
+            children: [
+              {
+                path: 'new',
+                element: <CreateCreditCard />,
+                action: createCreditCardAction,
+              },
+              {
+                path: ':creditCardId',
+                element: <>creditCardId page</>,
+              },
+            ],
           },
         ],
       },

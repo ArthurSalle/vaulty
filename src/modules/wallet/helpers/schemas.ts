@@ -1,0 +1,22 @@
+import { z } from 'zod'
+
+export const creditCardSchema = z.object({
+  bank_name: z.string().min(2, {
+    message: 'Bank name must be at least 2 characters.',
+  }),
+  cardholder_name: z.string().min(2, {
+    message: 'Name must be at least 2 characters.',
+  }),
+  card_number: z.string().length(19, {
+    message: 'Card number must be 16 characters.',
+  }),
+  card_expiration_date: z.string().length(5, {
+    message: 'Expiration date must be 4 characters.',
+  }),
+  card_cvc: z.string().length(3, {
+    message: 'CVC must be 3 characters.',
+  }),
+  default_card: z.boolean().default(false),
+})
+
+export type CreditCardSchema = z.infer<typeof creditCardSchema>
