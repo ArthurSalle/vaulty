@@ -24,20 +24,20 @@ export function filterCreditCards(
 export function getCreditCardLogo(cardType: string) {
   switch (cardType) {
     case 'Visa':
-      return 'public/card-logo/visa.png'
+      return '/card-logo/visa.png'
       break
     case 'Mastercard':
-      return 'public/card-logo/mastercard.png'
+      return '/card-logo/mastercard.png'
       break
     case 'American Express':
-      return 'public/card-logo/amex.png'
+      return '/card-logo/amex.png'
       break
     case 'Other':
-      return 'public/card-logo/cb.png'
+      return '/card-logo/cb.png'
       break
 
     default:
-      return 'public/card-logo/cb.png'
+      return '/card-logo/cb.png'
       break
   }
 }
