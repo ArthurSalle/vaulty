@@ -27,7 +27,7 @@ export const ConnectionsListItem = ({
         )
       }
     >
-      <Avatar className='h-11 w-11 border-2 bg-muted'>
+      <Avatar className='h-11 w-11 border-2 bg-white'>
         <AvatarImage
           src={
             connection.website
@@ -36,7 +36,7 @@ export const ConnectionsListItem = ({
           }
           alt='Avatar'
         />
-        <AvatarFallback>
+        <AvatarFallback className='text-2xl font-medium bg-white'>
           {connection.connection_name?.split(' ').map((el) => {
             return getFirstLetterCapitalized(el)
           })}

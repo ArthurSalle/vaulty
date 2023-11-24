@@ -31,11 +31,11 @@ export const IdentitiesListItem = ({ identity }: IdentitiesListItemProps) => {
         <Avatar
           className={cn(
             getRelationColor(identity.relation!),
-            'h-11 w-11 border-2 bg-muted'
+            'h-11 w-11 border-2 bg-white'
           )}
         >
           <AvatarImage src={identity.avatar} alt='Avatar' />
-          <AvatarFallback>
+          <AvatarFallback className='text-2xl font-medium bg-white'>
             {getFirstLetterCapitalized(identity.firstname) +
               getFirstLetterCapitalized(identity.lastname)}
           </AvatarFallback>

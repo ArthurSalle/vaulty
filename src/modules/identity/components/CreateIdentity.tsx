@@ -89,7 +89,7 @@ export const CreateIdentity = () => {
 
   return (
     <div className='w-full bg-white overflow-y-auto absolute inset-0 md:relative h-[calc(100dvh-53px)] md:h-full'>
-      <div className='flex flex-col gap-6 max-w-md w-full px-4 py-4 md:py-8 mx-auto'>
+      <div className='flex flex-col gap-6 max-w-lg w-full px-4 py-4 md:py-8 mx-auto'>
         <div className='flex items-center gap-2 md:gap-6'>
           <NavLink
             to='/identity'
@@ -110,7 +110,7 @@ export const CreateIdentity = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className='space-y-2 mb-4'
           >
-            <div className='flex flex-col md:flex-row gap-2 md:gap-6'>
+            <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
               <FormField
                 control={form.control}
                 name='firstname'
@@ -242,7 +242,7 @@ export const CreateIdentity = () => {
               )}
             />
 
-            <div className='flex flex-col md:flex-row gap-2 md:gap-6'>
+            <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
               <FormField
                 control={form.control}
                 name='genre'

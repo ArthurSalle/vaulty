@@ -108,14 +108,14 @@ export const EditIdentity = () => {
           <Avatar
             className={cn(
               getRelationColor(identity.relation!),
-              'h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-muted'
+              'h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-white'
             )}
           >
             <AvatarImage
               src={identity.avatar}
               alt={`${identity.firstname} avatar`}
             />
-            <AvatarFallback className='text-2xl font-medium'>
+            <AvatarFallback className='text-2xl font-medium bg-white'>
               {getFirstLetterCapitalized(identity.firstname) +
                 getFirstLetterCapitalized(identity.lastname)}
             </AvatarFallback>

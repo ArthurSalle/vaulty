@@ -70,7 +70,7 @@ export const ReadIdentity = () => {
 
   useEffect(() => {
     form.setValue('default_identity', identity.default_identity)
-  }, [identity.default_identity])
+  }, [identity])
 
   function onSubmit(value: DefaultIdentitySchema) {
     saveAsDefaultIdentity(value, identity.id, {
@@ -140,14 +140,14 @@ export const ReadIdentity = () => {
               <Avatar
                 className={cn(
                   getRelationColor(identity.relation!),
-                  'h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-muted'
+                  'h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-white'
                 )}
               >
                 <AvatarImage
                   src={identity.avatar}
                   alt={`${identity.firstname} avatar`}
                 />
-                <AvatarFallback className='text-2xl font-medium'>
+                <AvatarFallback className='text-2xl font-medium bg-white'>
                   {getFirstLetterCapitalized(identity.firstname) +
                     getFirstLetterCapitalized(identity.lastname)}
                 </AvatarFallback>
@@ -171,30 +171,28 @@ export const ReadIdentity = () => {
             </div>
           </div>
 
-          <div className='flex flex-col gap-2 lg:gap-4 md:mt-6 lg:mt-12 mx-auto max-w-xl w-full '>
-            <div className='flex flex-col lg:flex-row gap-2'>
-              <div className='w-full'>
-                <Label>Phone number</Label>
-                <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-                  {identity.phone ? formatPhoneNumber(identity.phone) : null}
-                </span>
-              </div>
-              <div className='w-full'>
-                <Label>Mail</Label>
-                <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-                  {identity.mail}
-                </span>
-              </div>
+          <div className='flex flex-col gap-2 md:mt-6 lg:mt-12 mx-auto max-w-xl w-full '>
+            <div className='w-full'>
+              <Label>Phone number</Label>
+              <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
+                {identity.phone ? formatPhoneNumber(identity.phone) : null}
+              </span>
+            </div>
+            <div className='w-full'>
+              <Label>Mail</Label>
+              <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
+                {identity.mail}
+              </span>
+            </div>
+
+            <div className='w-full'>
+              <Label>Birth date</Label>
+              <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
+                {identity.date ? formatDate(identity.date) : null}
+              </span>
             </div>
 
             <div className='flex flex-col lg:flex-row gap-2'>
-              <div className='w-full'>
-                <Label>Birth date</Label>
-                <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
-                  {identity.date ? formatDate(identity.date) : null}
-                </span>
-              </div>
-
               <div className='w-full'>
                 <Label>Genre</Label>
                 <span className='flex items-center mt-2 px-3 border border-input text-muted-foreground h-10 rounded-sm align-middle'>
@@ -215,13 +213,13 @@ export const ReadIdentity = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className='max-w-lg mx-auto py-4 lg:py-0'
+            className='max-w-lg mx-auto w-full py-4 lg:py-0'
           >
             <FormField
               control={form.control}
               name='default_identity'
               render={({ field }) => (
-                <FormItem className='flex items-center gap-4 md:gap-8 rounded-lg border p-3 shadow-sm'>
+                <FormItem className='flex items-center justify-between gap-2 rounded-lg border p-3 shadow-sm'>
                   <div className='space-y-0.5'>
                     <FormLabel>Default Identity</FormLabel>
                     <FormDescription>

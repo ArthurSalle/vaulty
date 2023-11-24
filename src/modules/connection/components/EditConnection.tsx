@@ -95,7 +95,7 @@ export const EditConnection = () => {
     <div className='bg-white h-[calc(100dvh-53px)] md:max-h-screen md:h-full absolute inset-0 md:relative overflow-y-auto p-4 md:py-8 md:px-12 flex flex-col gap-2'>
       <div className='flex justify-between items-center'>
         <div className='flex items-center gap-6'>
-          <Avatar className='h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-muted'>
+          <Avatar className='h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-white'>
             <AvatarImage
               src={
                 connection.website
@@ -104,7 +104,7 @@ export const EditConnection = () => {
               }
               alt={`${connection.connection_name} logo`}
             />
-            <AvatarFallback className='text-2xl font-medium'>
+            <AvatarFallback className='text-2xl font-medium bg-white'>
               {connection.connection_name?.split(' ').map((el) => {
                 return getFirstLetterCapitalized(el)
               })}
