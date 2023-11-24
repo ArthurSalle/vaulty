@@ -17,6 +17,12 @@ export const creditCardSchema = z.object({
     message: 'CVC must be 3 characters.',
   }),
   default_card: z.boolean().default(false),
+  card_type: z.enum(['Visa', 'Mastercard', 'American Express', 'Other']),
+})
+
+export const defaultCreditCardSchema = z.object({
+  default_card: z.boolean(),
 })
 
 export type CreditCardSchema = z.infer<typeof creditCardSchema>
+export type DefaultCreditCardSchema = z.infer<typeof defaultCreditCardSchema>

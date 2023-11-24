@@ -9,6 +9,7 @@ const creditCards = [
     card_expiration_date: '01/24',
     card_cvc: '987',
     default_card: true,
+    card_type: 'Mastercard',
   }),
   createCreditCard({
     bank_name: 'Société Générale',
@@ -17,6 +18,7 @@ const creditCards = [
     card_expiration_date: '07/25',
     card_cvc: '789',
     default_card: false,
+    card_type: 'Visa',
   }),
   createCreditCard({
     bank_name: 'American Express',
@@ -25,6 +27,7 @@ const creditCards = [
     card_expiration_date: '03/24',
     card_cvc: '321',
     default_card: false,
+    card_type: 'American Express',
   }),
 ]
 

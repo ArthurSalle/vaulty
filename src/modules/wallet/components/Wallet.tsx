@@ -1,10 +1,16 @@
-import { Outlet, useLoaderData } from 'react-router-dom'
+import {
+  Outlet,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom'
 import { SearchBar } from './SearchBar'
 import { getCreditCards } from '../storage/storage'
 import { CreditCard } from '../helpers/create-credit-card'
 import { CreditCardsList } from './CreditCardsList'
-import { ChangeEvent, useDeferredValue, useState } from 'react'
+import { ChangeEvent, useDeferredValue, useEffect, useState } from 'react'
 import { filterCreditCards } from '../helpers/helpers'
+import { useMediaQuery } from 'usehooks-ts'
 
 export function walletLoader() {
   return getCreditCards()
@@ -14,6 +20,9 @@ export const Wallet = () => {
   const creditCards = useLoaderData() as CreditCard[]
   const [search, setSearch] = useState('')
   const deferredSearch = useDeferredValue(search)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const isDesktop = useMediaQuery('(min-width: 768px)')
 
   function handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value)
@@ -22,6 +31,18 @@ export const Wallet = () => {
   function clearSearch() {
     setSearch('')
   }
+
+  useEffect(() => {
+    const firstCreditCardId = creditCards[0]?.id
+    const matchLocationPathname =
+      location.pathname === '/wallet' || location.pathname === '/wallet/'
+
+    if (isDesktop && firstCreditCardId && matchLocationPathname) {
+      navigate(`/wallet/${firstCreditCardId}`, {
+        replace: true,
+      })
+    }
+  }, [creditCards, location, isDesktop])
 
   return (
     <div className='flex w-full h-[100dvh] relative'>

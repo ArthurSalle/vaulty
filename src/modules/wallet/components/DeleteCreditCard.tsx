@@ -11,6 +11,10 @@ import {
 } from '@/components/ui/dialog'
 import { Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { deleteCreditCard } from '../storage/storage'
+import { toast } from '@/components/ui/use-toast'
+import { genericErrorToast } from '@/modules/shared/lib/utils'
+import { useSubmit } from 'react-router-dom'
 
 type DeleteCreditCardProps = {
   isOpen: boolean
@@ -23,8 +27,25 @@ export const DeleteCreditCard = ({
   setIsOpen,
   creditCard,
 }: DeleteCreditCardProps) => {
+  const onDeleteSubmit = useSubmit()
+
   function handleDelete() {
-    return
+    deleteCreditCard(creditCard.id, {
+      onSuccess() {
+        toast({
+          title: 'The card has been permantely deleted! 🥳',
+          description: 'Browse your list or create a new credit card.',
+        })
+        setIsOpen(false)
+
+        onDeleteSubmit({
+          method: 'get',
+        })
+      },
+      onError() {
+        genericErrorToast()
+      },
+    })
   }
 
   return (

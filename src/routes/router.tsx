@@ -43,8 +43,13 @@ import {
 } from '@/modules/wallet/components/CreateCreditCard'
 import {
   ReadCreditCard,
+  creditCardAction,
   readCreditCardLoader,
 } from '@/modules/wallet/components/ReadCreditCard'
+import {
+  EditCreditCard,
+  editCreditCardAction,
+} from '@/modules/wallet/components/EditCreditCard'
 
 export const router = createBrowserRouter([
   {
@@ -107,6 +112,13 @@ export const router = createBrowserRouter([
                 path: ':creditCardId',
                 element: <ReadCreditCard />,
                 loader: readCreditCardLoader,
+                action: creditCardAction,
+              },
+              {
+                path: ':creditCardId/edit',
+                element: <EditCreditCard />,
+                loader: readCreditCardLoader,
+                action: editCreditCardAction,
               },
             ],
           },

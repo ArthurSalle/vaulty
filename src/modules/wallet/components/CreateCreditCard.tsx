@@ -22,6 +22,13 @@ import { PatternFormat } from 'react-number-format'
 import { saveCreditcard } from '../storage/storage'
 import { toast } from '@/components/ui/use-toast'
 import { genericErrorToast } from '@/modules/shared/lib/utils'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 export async function createCreditCardAction({ request }: ActionFunctionArgs) {
   const json = await request.json()
@@ -50,7 +57,6 @@ export const CreateCreditCard = () => {
           title: 'Credit card successfully saved! 🤑',
           description: 'Check it out.',
         })
-        console.log(id)
 
         onCreateSubmit(
           {
@@ -71,7 +77,7 @@ export const CreateCreditCard = () => {
 
   return (
     <div className='w-full bg-white overflow-y-auto absolute inset-0 md:relative h-[calc(100dvh-53px)] md:h-full'>
-      <div className='flex flex-col gap-6 max-w-md w-full px-4 py-4 md:py-8 mx-auto'>
+      <div className='flex flex-col md:justify-center gap-6 h-full max-w-lg w-full px-4 py-8 mx-auto'>
         <div className='flex items-center gap-2 md:gap-6'>
           <NavLink
             to='/wallet'
@@ -83,7 +89,7 @@ export const CreateCreditCard = () => {
             <ArrowLeft size={20} strokeWidth={2.5} />
           </NavLink>
           <h1 className='text-2xl md:text-3xl font-bold'>
-            Create a new identity
+            Create a new credit card
           </h1>
         </div>
 
@@ -120,27 +126,63 @@ export const CreateCreditCard = () => {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name='card_number'
-              render={({ field: { value, onChange } }) => (
-                <FormItem>
-                  <FormLabel>Card number</FormLabel>
-                  <FormControl>
-                    <PatternFormat
-                      onChange={onChange}
-                      value={value}
-                      format='#### #### #### ####'
-                      placeholder='1234 1234 1234 1234'
-                      customInput={Input}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
+              <div className='w-full'>
+                <FormField
+                  control={form.control}
+                  name='card_number'
+                  render={({ field: { value, onChange } }) => (
+                    <FormItem>
+                      <FormLabel>Card number</FormLabel>
+                      <FormControl>
+                        <PatternFormat
+                          onChange={onChange}
+                          value={value}
+                          format='#### #### #### ####'
+                          placeholder='1234 1234 1234 1234'
+                          customInput={Input}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-            <div className='flex gap-2'>
+              <div className='w-full'>
+                <FormField
+                  control={form.control}
+                  name='card_type'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Card type</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className='text-muted-foreground'>
+                            <SelectValue placeholder='Select the genre' />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value='Visa'>Visa</SelectItem>
+                          <SelectItem value='Mastercard'>Mastercard</SelectItem>
+                          <SelectItem value='American Express'>
+                            American Express
+                          </SelectItem>
+                          <SelectItem value='Other'>Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
+            <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
               <FormField
                 control={form.control}
                 name='card_expiration_date'

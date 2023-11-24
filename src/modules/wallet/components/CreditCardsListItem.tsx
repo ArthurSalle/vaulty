@@ -6,7 +6,8 @@ import {
   getFirstLetterCapitalized,
 } from '@/modules/shared/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { getCreditCardLogo } from '../helpers/helpers'
 
 type CreditCardsListItemProps = {
   creditCard: CreditCard
@@ -28,8 +29,12 @@ export const CreditCardsListItem = ({
           )
         }
       >
-        <Avatar className='h-11 w-11 border-2 bg-muted'>
-          <AvatarFallback>
+        <Avatar className='h-11 w-11 border-2 bg-white'>
+          <AvatarImage
+            src={getCreditCardLogo(creditCard.card_type)}
+            alt='card-logo'
+          />
+          <AvatarFallback className='text-2xl font-medium bg-white'>
             {creditCard.bank_name.split(' ').map((el) => {
               return getFirstLetterCapitalized(el)
             })}
