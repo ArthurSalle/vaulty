@@ -1,0 +1,179 @@
+import {
+  LoaderFunction,
+  NavLink,
+  redirect,
+  useLoaderData,
+} from 'react-router-dom'
+import { getCreditCard } from '../storage/storage'
+import { CreditCard } from '../helpers/create-credit-card'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { ArrowLeft, Edit, Eye, EyeOff, Trash2 } from 'lucide-react'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import {
+  capitalizeFirstLetter,
+  getFirstLetterCapitalized,
+} from '@/modules/shared/lib/utils'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { useEffect, useState } from 'react'
+import { DeleteCreditCard } from './DeleteCreditCard'
+
+export const readCreditCardLoader: LoaderFunction = ({ params }) => {
+  const creditCard = getCreditCard(params.creditCardId!)
+  if (!creditCard) {
+    return redirect('/wallet/new')
+  }
+  return creditCard
+}
+
+export const ReadCreditCard = () => {
+  const creditCard = useLoaderData() as CreditCard
+  const [visibility, setVisibility] = useState(false)
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
+
+  function openDeleteModal() {
+    setDeleteModalOpen(true)
+  }
+
+  useEffect(() => {
+    setVisibility(false)
+  }, [creditCard])
+
+  return (
+    <div className='bg-white h-[calc(100dvh-53px)] md:h-screen overflow-y-auto absolute inset-0 md:relative'>
+      <div className='py-2 px-4 md:hidden flex justify-between items-center border-b'>
+        <div>
+          <NavLink
+            to='/wallet'
+            className={buttonVariants({
+              size: 'icon',
+              variant: 'outline',
+            })}
+          >
+            <ArrowLeft size={20} strokeWidth={2.5} />
+          </NavLink>
+        </div>
+
+        <div className='flex items-center gap-2'>
+          <NavLink
+            to={`/wallet/${creditCard.id}/edit`}
+            className={buttonVariants({ size: 'icon', variant: 'outline' })}
+          >
+            <Edit className='h-5' />
+          </NavLink>
+          <Button variant='outline' size='icon' onClick={openDeleteModal}>
+            <Trash2 className='h-5 text-customred' />
+          </Button>
+        </div>
+      </div>
+
+      <div className='py-4 md:py-8 px-4 md:px-12 flex flex-col justify-between max-h-[calc(100%-57px)] md:max-h-[100dvh] h-full'>
+        <div className='flex flex-col gap-2'>
+          <div className='flex justify-between items-center'>
+            <div className='flex items-center gap-6'>
+              <Avatar className='h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-muted'>
+                <AvatarFallback className='text-2xl font-medium'>
+                  {creditCard.bank_name?.split(' ').map((el) => {
+                    return getFirstLetterCapitalized(el)
+                  })}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <h1 className='text-2xl font-medium'>
+                  {creditCard.bank_name?.split(' ').map((el) => {
+                    return capitalizeFirstLetter(el) + ' '
+                  })}
+                </h1>
+              </div>
+            </div>
+            <div className='md:flex gap-2 items-center hidden'>
+              <NavLink
+                to={`/wallet/${creditCard.id}/edit`}
+                className={buttonVariants({ size: 'icon', variant: 'outline' })}
+              >
+                <Edit className='h-5' />
+              </NavLink>
+              <Button variant='outline' size='icon' onClick={openDeleteModal}>
+                <Trash2 className='h-5 text-customred' />
+              </Button>
+            </div>
+          </div>
+
+          <div className='flex flex-col gap-2 lg:gap-4 md:mt-6 lg:mt-12 mx-auto max-w-xl w-full'>
+            <div className='flex flex-col gap-2'>
+              <div className='w-full'>
+                <Label>Cardholder name</Label>
+                <div className='relative flex items-center'>
+                  <Input
+                    readOnly
+                    value={creditCard.cardholder_name}
+                    className='mt-2 focus-visible:ring-transparent'
+                  />
+                </div>
+              </div>
+
+              <div className='w-full'>
+                <Label>Card number</Label>
+                <div className='relative flex items-center'>
+                  <Input
+                    readOnly
+                    value={creditCard.card_number}
+                    className='mt-2 focus-visible:ring-transparent'
+                  />
+                </div>
+              </div>
+
+              <div className='w-full flex gap-2'>
+                <div className='w-full'>
+                  <Label>Expiration date</Label>
+                  <div className='relative flex items-center'>
+                    <Input
+                      readOnly
+                      value={creditCard.card_expiration_date}
+                      className='mt-2 focus-visible:ring-transparent'
+                    />
+                  </div>
+                </div>
+
+                <div className='w-full'>
+                  <Label>CVC</Label>
+                  <div className='relative flex items-center'>
+                    <Input
+                      readOnly
+                      value={creditCard.card_cvc}
+                      type={visibility ? 'text' : 'password'}
+                      className='mt-2 focus-visible:ring-transparent'
+                    />
+                    {creditCard.card_cvc !== '' ? (
+                      visibility ? (
+                        <EyeOff
+                          className='absolute right-4 mt-2 cursor-pointer text-muted-foreground'
+                          onClick={() => {
+                            setVisibility(!visibility)
+                          }}
+                        />
+                      ) : (
+                        <Eye
+                          className='absolute right-4 mt-2 cursor-pointer text-muted-foreground'
+                          onClick={() => {
+                            setVisibility(!visibility)
+                          }}
+                        />
+                      )
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <DeleteCreditCard
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setDeleteModalOpen}
+        creditCard={creditCard}
+      />
+    </div>
+  )
+}

@@ -11,7 +11,7 @@ export const CreditCardsList = ({ creditCards }: CreditCardsListProps) => {
     <ul>
       {creditCards.length === 0 ? (
         <span className='block py-4 text-center text-muted-foreground'>
-          <i>No identities found</i>
+          <i>No credit cards found</i>
         </span>
       ) : (
         creditCards.map((creditCard, index) => {

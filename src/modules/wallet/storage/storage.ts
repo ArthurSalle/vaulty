@@ -15,6 +15,12 @@ export function getCreditCards() {
   return parsedCreditCards
 }
 
+export function getCreditCard(id: string) {
+  const creditCards = getCreditCards()
+
+  return creditCards.find((card) => card.id === id)
+}
+
 export function saveCreditcard(
   value: CreditCardSchema,
   {
