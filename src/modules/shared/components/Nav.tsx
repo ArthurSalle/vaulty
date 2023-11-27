@@ -8,6 +8,15 @@ import {
 } from 'lucide-react'
 import { NavLink, useLocation } from 'react-router-dom'
 
+const svgGradient = (
+  <svg width='0' height='0'>
+    <linearGradient id='vaulty-gradient' x1='100%' y1='100%' x2='0%' y2='0%'>
+      <stop stopColor='#fbbf24' offset='0%' />
+      <stop stopColor='#f87171' offset='100%' />
+    </linearGradient>
+  </svg>
+)
+
 export const NavDesktop = () => {
   const { pathname } = useLocation()
 
@@ -39,7 +48,14 @@ export const NavDesktop = () => {
             }
           >
             {pathname.includes('connection') ? (
-              <UnlockKeyhole size={25} strokeWidth={1.8} />
+              <>
+                {svgGradient}
+                <UnlockKeyhole
+                  size={25}
+                  strokeWidth={1.8}
+                  style={{ stroke: 'url(#vaulty-gradient)' }}
+                />
+              </>
             ) : (
               <LockKeyhole size={25} strokeWidth={1.8} />
             )}
@@ -53,7 +69,18 @@ export const NavDesktop = () => {
                 : 'p-3 hover:bg-muted rounded-full transition-colors hover:duration-300'
             }
           >
-            <WalletCards size={25} strokeWidth={1.8} />
+            {pathname.includes('wallet') ? (
+              <>
+                {svgGradient}
+                <WalletCards
+                  size={25}
+                  strokeWidth={1.8}
+                  style={{ stroke: 'url(#vaulty-gradient)' }}
+                />
+              </>
+            ) : (
+              <WalletCards size={25} strokeWidth={1.8} />
+            )}
           </NavLink>
 
           <NavLink
@@ -64,7 +91,18 @@ export const NavDesktop = () => {
                 : 'p-3 hover:bg-muted rounded-full transition-colors hover:duration-300'
             }
           >
-            <Fingerprint size={25} strokeWidth={1.8} />
+            {pathname.includes('identity') ? (
+              <>
+                {svgGradient}
+                <Fingerprint
+                  size={25}
+                  strokeWidth={1.8}
+                  style={{ stroke: 'url(#vaulty-gradient)' }}
+                />
+              </>
+            ) : (
+              <Fingerprint size={25} strokeWidth={1.8} />
+            )}
           </NavLink>
 
           <NavLink
@@ -75,7 +113,18 @@ export const NavDesktop = () => {
                 : 'p-3 hover:bg-muted rounded-full transition-colors hover:duration-300'
             }
           >
-            <Settings size={25} strokeWidth={1.8} />
+            {pathname.includes('settings') ? (
+              <>
+                {svgGradient}
+                <Settings
+                  size={25}
+                  strokeWidth={1.8}
+                  style={{ stroke: 'url(#vaulty-gradient)' }}
+                />
+              </>
+            ) : (
+              <Settings size={25} strokeWidth={1.8} />
+            )}
           </NavLink>
         </ul>
 
@@ -98,15 +147,6 @@ export const NavDesktop = () => {
 
 export const NavMobile = () => {
   const { pathname } = useLocation()
-
-  const svgGradient = (
-    <svg width='0' height='0'>
-      <linearGradient id='vaulty-gradient' x1='100%' y1='100%' x2='0%' y2='0%'>
-        <stop stopColor='#fbbf24' offset='0%' />
-        <stop stopColor='#f87171' offset='100%' />
-      </linearGradient>
-    </svg>
-  )
 
   return (
     <>
