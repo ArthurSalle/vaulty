@@ -1,5 +1,6 @@
 import {
   Fingerprint,
+  Home,
   LockKeyhole,
   Settings,
   UnlockKeyhole,
@@ -101,7 +102,41 @@ export const NavMobile = () => {
   return (
     <>
       <nav className='bg-white fixed bottom-0 left-0 right-0 z-50 w-full py-2 border-t'>
-        <ul className='flex justify-center items-center gap-10'>
+        <ul className='flex justify-center items-center gap-6 sm:gap-10'>
+          <NavLink
+            to='/'
+            className={({ isActive }) =>
+              isActive
+                ? 'bg-muted p-2 rounded-full'
+                : 'p-2 hover:bg-muted rounded-full transition-colors hover:duration-300'
+            }
+          >
+            {pathname === '/' ? (
+              <>
+                {' '}
+                <svg width='0' height='0'>
+                  <linearGradient
+                    id='vaulty-gradient'
+                    x1='100%'
+                    y1='100%'
+                    x2='0%'
+                    y2='0%'
+                  >
+                    <stop stopColor='#fbbf24' offset='0%' />
+                    <stop stopColor='#f87171' offset='100%' />
+                  </linearGradient>
+                </svg>
+                <Home
+                  size={20}
+                  strokeWidth={1.8}
+                  style={{ stroke: 'url(#vaulty-gradient)' }}
+                />
+              </>
+            ) : (
+              <Home size={20} strokeWidth={1.8} />
+            )}
+          </NavLink>
+
           <NavLink
             to='/connection'
             className={() =>

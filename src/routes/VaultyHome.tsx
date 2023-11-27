@@ -1,8 +1,22 @@
 import { motion } from 'framer-motion'
+// import { useEffect } from 'react'
+// import { useNavigate } from 'react-router-dom'
+// import { useMediaQuery } from 'usehooks-ts'
 
 export const VaultyHome = () => {
+  // const isMobile = useMediaQuery('(max-width: 768px)')
+  // const navigate = useNavigate()
+
+  // useEffect(() => {
+  //   if (isMobile) {
+  //     navigate(`/connection`, {
+  //       replace: true,
+  //     })
+  //   }
+  // }, [isMobile])
+
   return (
-    <div className='hidden md:block overflow-y-auto max-h-[100dvh]'>
+    <div className='md:overflow-y-auto md:max-h-[100dvh]'>
       <motion.div
         animate={{ y: [-100, 0] }}
         transition={{
