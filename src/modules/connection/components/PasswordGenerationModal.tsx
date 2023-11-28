@@ -187,7 +187,7 @@ export const PasswordGenerationModal = ({
           </div>
         </div>
 
-        <DialogFooter className='gap-1'>
+        <DialogFooter className='gap-2'>
           <DialogClose asChild>
             <Button type='button' variant='secondary'>
               Cancel

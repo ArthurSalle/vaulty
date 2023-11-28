@@ -85,9 +85,9 @@ export const CreateConnection = () => {
   }
 
   return (
-    <div className='w-full bg-white overflow-y-auto absolute inset-0 md:relative h-[calc(100dvh-53px)] md:h-full'>
-      <div className='flex flex-col gap-6 max-w-lg w-full px-4 py-4 md:py-8 mx-auto'>
-        <div className='flex items-center gap-2 md:gap-6'>
+    <div className='h-[calc(100dvh-53px)] md:h-full w-full overflow-y-auto absolute inset-0 md:relative bg-background'>
+      <div className='h-full w-full p-4 md:px-8'>
+        <div className='flex items-center gap-2 md:gap-4'>
           <NavLink
             to='/connection'
             className={buttonVariants({
@@ -97,13 +97,16 @@ export const CreateConnection = () => {
           >
             <ArrowLeft size={20} strokeWidth={2.5} />
           </NavLink>
-          <h1 className='text-2xl md:text-3xl font-bold'>
+          <h1 className='text-lg sm:text-2xl md:text-3xl font-bold'>
             Create a new connection
           </h1>
         </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2'>
+          <form
+            className='space-y-4 max-w-lg mx-auto mt-6'
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
             <FormField
               control={form.control}
               name='connection_name'
@@ -215,8 +218,8 @@ export const CreateConnection = () => {
               )}
             />
 
-            <div className='pt-4'>
-              <Button type='submit'>Save identity</Button>
+            <div className='py-4'>
+              <Button type='submit'>Save connection</Button>
             </div>
           </form>
         </Form>
