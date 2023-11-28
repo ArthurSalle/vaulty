@@ -29,12 +29,12 @@ export const CreditCardsListItem = ({
           )
         }
       >
-        <Avatar className='h-11 w-11 border-2 bg-white'>
+        <Avatar className='h-11 w-11 border-2 bg-background'>
           <AvatarImage
             src={getCreditCardLogo(creditCard.card_type)}
             alt='card-logo'
           />
-          <AvatarFallback className='text-2xl font-medium bg-white'>
+          <AvatarFallback className='text-lg font-medium bg-background'>
             {creditCard.bank_name.split(' ').map((el) => {
               return getFirstLetterCapitalized(el)
             })}

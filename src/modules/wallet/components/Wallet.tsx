@@ -33,12 +33,12 @@ export const Wallet = () => {
   }
 
   useEffect(() => {
-    const firstCreditCardId = creditCards[0]?.id
+    const firstCreditCard = creditCards[0]
     const matchLocationPathname =
       location.pathname === '/wallet' || location.pathname === '/wallet/'
 
-    if (isDesktop && firstCreditCardId && matchLocationPathname) {
-      navigate(`/wallet/${firstCreditCardId}`, {
+    if (isDesktop && firstCreditCard && matchLocationPathname) {
+      navigate(`/wallet/${firstCreditCard.id}`, {
         replace: true,
       })
     }

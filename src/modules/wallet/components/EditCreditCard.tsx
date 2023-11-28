@@ -88,15 +88,15 @@ export const EditCreditCard = () => {
   }
 
   return (
-    <div className='bg-white h-[calc(100dvh-53px)] md:max-h-screen md:h-full absolute inset-0 md:relative overflow-y-auto p-4 md:py-8 md:px-12 flex flex-col gap-2'>
+    <div className='bg-background h-[calc(100dvh-53px)] md:max-h-screen md:h-full absolute inset-0 md:relative overflow-y-auto p-4 md:px-12 flex flex-col gap-2'>
       <div className='flex justify-between items-center'>
         <div className='flex items-center gap-6'>
-          <Avatar className='h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-white'>
+          <Avatar className='h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-background'>
             <AvatarImage
               src={getCreditCardLogo(creditCard.card_type)}
               alt='card-logo'
             />
-            <AvatarFallback className='text-2xl font-medium bg-white'>
+            <AvatarFallback className='text-3xl font-medium bg-background'>
               {creditCard.bank_name?.split(' ').map((el) => {
                 return getFirstLetterCapitalized(el)
               })}

@@ -42,7 +42,7 @@ export const readCreditCardLoader: LoaderFunction = ({ params }) => {
   const creditCard = getCreditCard(params.creditCardId!)
 
   if (!creditCard) {
-    return redirect('/wallet/new')
+    return redirect('/wallet')
   }
 
   return creditCard
@@ -114,7 +114,7 @@ export const ReadCreditCard = () => {
   }
 
   return (
-    <div className='bg-white h-[calc(100dvh-53px)] md:h-screen overflow-y-auto absolute inset-0 md:relative'>
+    <div className='bg-background h-[calc(100dvh-53px)] md:h-screen overflow-y-auto absolute inset-0 md:relative'>
       <div className='py-2 px-4 md:hidden flex justify-between items-center border-b'>
         <div>
           <NavLink
@@ -141,16 +141,16 @@ export const ReadCreditCard = () => {
         </div>
       </div>
 
-      <div className='py-4 md:py-8 px-4 md:px-12 flex flex-col justify-between max-h-[calc(100%-57px)] md:max-h-[100dvh] h-full'>
+      <div className='py-4  px-4 md:px-12 flex flex-col justify-between max-h-[calc(100%-57px)] md:max-h-[100dvh] h-full'>
         <div className='flex flex-col gap-2'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center gap-6'>
-              <Avatar className='h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-white'>
+              <Avatar className='h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-background'>
                 <AvatarImage
                   src={getCreditCardLogo(creditCard.card_type)}
                   alt='card-logo'
                 />
-                <AvatarFallback className='text-2xl font-medium bg-white'>
+                <AvatarFallback className='text-3xl font-medium bg-background'>
                   {creditCard.bank_name?.split(' ').map((el) => {
                     return getFirstLetterCapitalized(el)
                   })}

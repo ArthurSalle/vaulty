@@ -59,14 +59,14 @@ export const DeleteCreditCard = ({
           <DialogDescription className='py-3 text-base'>
             This action cannot be undone. Are you sure you want to permanently
             delete&nbsp;
-            <span className='text-black font-medium'>
+            <span className='text-black dark:text-white font-medium'>
               {creditCard.bank_name}
             </span>
             &nbsp;card from your list?
           </DialogDescription>
         </DialogHeader>
 
-        <DialogFooter className='gap-1'>
+        <DialogFooter className='gap-2'>
           <DialogClose asChild>
             <Button type='button' variant='secondary'>
               Cancel

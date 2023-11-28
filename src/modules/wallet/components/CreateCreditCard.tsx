@@ -8,7 +8,6 @@ import {
   useSubmit,
 } from 'react-router-dom'
 import { Button, buttonVariants } from '@/components/ui/button'
-import { ArrowLeft } from 'lucide-react'
 import {
   Form,
   FormControl,
@@ -29,6 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { ArrowLeft } from 'lucide-react'
 
 export async function createCreditCardAction({ request }: ActionFunctionArgs) {
   const json = await request.json()
@@ -76,9 +76,9 @@ export const CreateCreditCard = () => {
   }
 
   return (
-    <div className='w-full bg-white overflow-y-auto absolute inset-0 md:relative h-[calc(100dvh-53px)] md:h-full'>
-      <div className='flex flex-col md:justify-center gap-6 h-full max-w-lg w-full px-4 py-8 mx-auto'>
-        <div className='flex items-center gap-2 md:gap-6'>
+    <div className='h-[calc(100dvh-53px)] md:h-full w-full overflow-y-auto absolute inset-0 md:relative bg-background'>
+      <div className='h-full w-full p-4 md:px-8'>
+        <div className='flex items-center gap-2 md:gap-4'>
           <NavLink
             to='/wallet'
             className={buttonVariants({
@@ -88,14 +88,14 @@ export const CreateCreditCard = () => {
           >
             <ArrowLeft size={20} strokeWidth={2.5} />
           </NavLink>
-          <h1 className='text-2xl md:text-3xl font-bold'>
+          <h1 className='text-lg sm:text-2xl md:text-3xl font-bold [text-wrap:balance]'>
             Create a new credit card
           </h1>
         </div>
 
         <Form {...form}>
           <form
-            className='space-y-2 mb-4'
+            className='space-y-4 max-w-lg mx-auto mt-6'
             onSubmit={form.handleSubmit(onSubmit)}
           >
             <FormField
@@ -224,7 +224,7 @@ export const CreateCreditCard = () => {
               />
             </div>
 
-            <div className='pt-4'>
+            <div className='py-4'>
               <Button type='submit'>Save credit card</Button>
             </div>
           </form>

@@ -37,7 +37,7 @@ export function getCreditCardLogo(cardType: string) {
       break
 
     default:
-      return '/card-logo/cb.png'
+      return
       break
   }
 }
