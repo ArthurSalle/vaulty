@@ -150,7 +150,7 @@ export const NavMobile = () => {
 
   return (
     <>
-      <nav className='bg-white fixed bottom-0 left-0 right-0 z-50 w-full py-2 border-t'>
+      <nav className='bg-background fixed bottom-0 left-0 right-0 z-50 w-full py-2 border-t'>
         <ul className='flex justify-center items-center gap-6 sm:gap-10'>
           <NavLink
             to='/'
