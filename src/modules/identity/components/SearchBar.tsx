@@ -32,9 +32,10 @@ export const SearchBar = ({
         to='/identity/new'
         className={buttonVariants({
           size: 'icon',
+          variant: 'outline',
         })}
       >
-        <Plus size={20} strokeWidth={2.5} />
+        <Plus />
       </Link>
     </div>
   )

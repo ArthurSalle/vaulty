@@ -88,9 +88,9 @@ export const CreateIdentity = () => {
   }
 
   return (
-    <div className='w-full bg-white overflow-y-auto absolute inset-0 md:relative h-[calc(100dvh-53px)] md:h-full'>
-      <div className='flex flex-col gap-6 max-w-lg w-full px-4 py-4 md:py-8 mx-auto'>
-        <div className='flex items-center gap-2 md:gap-6'>
+    <div className='h-[calc(100dvh-53px)] md:h-full w-full overflow-y-auto absolute inset-0 md:relative bg-background'>
+      <div className='h-full w-full p-4 md:px-8'>
+        <div className='flex items-center gap-2 md:gap-4'>
           <NavLink
             to='/identity'
             className={buttonVariants({
@@ -100,7 +100,7 @@ export const CreateIdentity = () => {
           >
             <ArrowLeft size={20} strokeWidth={2.5} />
           </NavLink>
-          <h1 className='text-2xl md:text-3xl font-bold'>
+          <h1 className='text-lg sm:text-2xl md:text-3xl font-bold'>
             Create a new identity
           </h1>
         </div>
@@ -108,7 +108,7 @@ export const CreateIdentity = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className='space-y-2 mb-4'
+            className='space-y-4 max-w-lg mx-auto mt-6'
           >
             <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
               <FormField
@@ -319,7 +319,7 @@ export const CreateIdentity = () => {
               />
             </div>
 
-            <div className='pt-4'>
+            <div className='py-4'>
               <Button type='submit'>Save identity</Button>
             </div>
           </form>

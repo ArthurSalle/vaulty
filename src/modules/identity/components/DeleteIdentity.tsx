@@ -23,7 +23,7 @@ type PropsType = {
 }
 
 export const DeleteIdentity = ({ isOpen, setIsOpen, identity }: PropsType) => {
-  const submit = useSubmit()
+  const onDeleteSubmit = useSubmit()
 
   function handleDelete() {
     deleteIdentity(identity.id, {
@@ -34,7 +34,7 @@ export const DeleteIdentity = ({ isOpen, setIsOpen, identity }: PropsType) => {
         })
         setIsOpen(false)
 
-        submit({
+        onDeleteSubmit({
           method: 'get',
         })
       },
@@ -55,14 +55,14 @@ export const DeleteIdentity = ({ isOpen, setIsOpen, identity }: PropsType) => {
           <DialogDescription className='py-3 text-base'>
             This action cannot be undone. Are you sure you want to permanently
             delete&nbsp;
-            <span className='text-black font-medium'>
+            <span className='text-black dark:text-white font-medium'>
               {identity.firstname + ' ' + identity.lastname}
             </span>
             &nbsp;from your list?
           </DialogDescription>
         </DialogHeader>
 
-        <DialogFooter className='gap-1'>
+        <DialogFooter className='gap-2'>
           <DialogClose asChild>
             <Button type='button' variant='secondary'>
               Cancel

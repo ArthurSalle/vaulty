@@ -102,20 +102,20 @@ export const EditIdentity = () => {
   }
 
   return (
-    <div className='bg-white h-[calc(100dvh-53px)] md:max-h-screen md:h-full absolute inset-0 md:relative overflow-y-auto p-4 md:py-8 md:px-12 flex flex-col'>
+    <div className='bg-background h-[calc(100dvh-53px)] md:max-h-screen md:h-full absolute inset-0 md:relative overflow-y-auto p-4 md:px-12 flex flex-col'>
       <div className='flex justify-between items-center'>
         <div className='flex items-center gap-6'>
           <Avatar
             className={cn(
               getRelationColor(identity.relation!),
-              'h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-white'
+              'h-14 md:h-20 w-14 md:w-20 border-4 md:drop-shadow-xl bg-background'
             )}
           >
             <AvatarImage
               src={identity.avatar}
               alt={`${identity.firstname} avatar`}
             />
-            <AvatarFallback className='text-2xl font-medium bg-white'>
+            <AvatarFallback className='text-3xl font-medium bg-background'>
               {getFirstLetterCapitalized(identity.firstname) +
                 getFirstLetterCapitalized(identity.lastname)}
             </AvatarFallback>
@@ -136,7 +136,7 @@ export const EditIdentity = () => {
         </div>
       </div>
 
-      <div className='w-full flex items-center justify-center mt-8'>
+      <div className='w-full flex items-center justify-center mt-6'>
         <div className='flex flex-col gap-6 max-w-md w-full'>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2'>
