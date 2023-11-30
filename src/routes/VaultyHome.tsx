@@ -71,7 +71,7 @@ export const VaultyHome = () => {
           <span className='px-0.5 rounded-[2px] bg-gradient-to-r from-red-400 to-amber-400 dark:text-black [text-wrap:balance]'>
             personnal info
           </span>
-          <br className='' />
+          <br className='hidden sm:block' />
           &nbsp;in one safe place
         </h2>
 
