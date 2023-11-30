@@ -14,7 +14,7 @@ export function Settings() {
   const { setTheme } = useTheme()
 
   return (
-    <div className='h-full w-full p-5'>
+    <div className='h-full w-full p-4'>
       <h1 className='text-2xl font-semibold'>Settings</h1>
 
       <div className='max-w-lg mx-auto mt-14 flex flex-col gap-8'>
