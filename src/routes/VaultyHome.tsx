@@ -66,10 +66,10 @@ export const VaultyHome = () => {
           ease: 'easeInOut',
         }}
       >
-        <h2 className='mt-12 lg:mt-24 text-2xl md:text-4xl font-bold text-center [text-wrap:balance] px-4'>
+        <h2 className='mt-12 lg:mt-24 text-3xl md:text-4xl font-bold text-center [text-wrap:balance] px-4'>
           Store all your&nbsp;
           <span className='px-0.5 rounded-[2px] bg-gradient-to-r from-red-400 to-amber-400 dark:text-black [text-wrap:balance]'>
-            information
+            details
           </span>
           <br className='hidden sm:block' />
           &nbsp;in one safe place
