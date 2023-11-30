@@ -53,3 +53,13 @@ export function genericErrorToast() {
     description: 'Please try again.',
   })
 }
+
+export function resetLocalStorage() {
+  localStorage.removeItem('connections')
+  localStorage.removeItem('credit_cards')
+  localStorage.removeItem('identities')
+
+  toast({
+    title: 'localStorage successfully reset! 🚀',
+  })
+}
