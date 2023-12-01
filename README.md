@@ -9,14 +9,11 @@
 Password vault and generator
 
 
-<a href='https://fr.react.dev/'>React<a/>
-<a href='https://www.typescriptlang.org/'>TypeScript<a/>
-<a href='https://vitejs.dev/'>Vite<a/>
-
-- React
-- React Router Dom V6
-- React Hook Form
-- Zod
-- TypeScript
-- Vite
-- Tailwindcss
+- <a href='https://fr.react.dev/'>React<a/>
+- <a href='https://www.typescriptlang.org/'>TypeScript<a/>
+- <a href='https://vitejs.dev/'>Vite<a/>
+- <a href='https://reactrouter.com/en/main'>React Router Dom V6<a/>
+- <a href='https://react-hook-form.com/'>React Hook Form<a/>
+- <a href='https://zod.dev/'>Zod<a/>
+- <a href='https://tailwindcss.com/'>Tailwind<a/>
+- <a href='https://ui.shadcn.com/'>Shadcn ui<a/>
