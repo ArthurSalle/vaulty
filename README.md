@@ -10,6 +10,9 @@
 Password vault and generator
 
 
+<button type='button'>Add to favorites</button>
+
+
 - <button><a href='https://fr.react.dev/'>React<a/> <img src='https://www.google.com/s2/favicons?domain=https://fr.react.dev/' /></button>
 - <a href='https://www.typescriptlang.org/'>TypeScript<a/> <img src='https://www.google.com/s2/favicons?domain=https://www.typescriptlang.org/' />
 - <a href='https://vitejs.dev/'>Vite <img src='https://www.google.com/s2/favicons?domain=https://vitejs.dev/' /><a/>
