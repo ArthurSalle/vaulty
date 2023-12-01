@@ -2,14 +2,15 @@
 <img alt="vaulty logo" src="public/favicon.ico" width="40" />
 </p>
 <h1 align="center">
-  Vaulty.
+  <a href='https://vaulty.vercel.app/' target='_blank'>Vaulty.</a>
+ 
 </h1>
 
 
 Password vault and generator
 
 
-- <a href='https://fr.react.dev/'>React<a/>
+- <a href='https://fr.react.dev/'>React<a/> :react:
 - <a href='https://www.typescriptlang.org/'>TypeScript<a/>
 - <a href='https://vitejs.dev/'>Vite<a/>
 - <a href='https://reactrouter.com/en/main'>React Router Dom V6<a/>
