@@ -1,4 +1,10 @@
-# Vaulty <img src='public/favicon.ico' alt='vaulty logo' height='32px'/>
+<p align="center">  
+<img alt="vaulty logo" src="public/favicon.ico" width="60" />
+</p>
+<h1 align="center">
+  Vaulty.
+</h1>
+
 
 Password vault and generator
 
