@@ -9,6 +9,8 @@
 
 Password vault and generator
 
+https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+
 
 - <a href='https://fr.react.dev/' target='_blank'>React <img src='https://www.google.com/s2/favicons?domain=https://fr.react.dev/' /><a/> 
 - <a href='https://www.typescriptlang.org/' target='_blank'>TypeScript <img src='https://www.google.com/s2/favicons?domain=https://www.typescriptlang.org/' /><a/>
