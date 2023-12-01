@@ -1,4 +1,4 @@
-# Vaulty 🔒
+# Vaulty <img src='/favicon.ico'/>
 
 Password vault and generator
 
