@@ -1,4 +1,4 @@
-# Vaulty <img src='/favicon.ico'/>
+# Vaulty <img src='public/favicon.ico'/>
 
 Password vault and generator
 
