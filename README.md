@@ -10,9 +10,7 @@
 Password vault and generator
 
 
-
-
-- <a href='https://fr.react.dev/' target='_blank' style='text-decoration: none;'>React <img src='https://www.google.com/s2/favicons?domain=https://fr.react.dev/' /><a/> 
+- <a href='https://fr.react.dev/' target='_blank'>React <img src='https://www.google.com/s2/favicons?domain=https://fr.react.dev/' /><a/> 
 - <a href='https://www.typescriptlang.org/' target='_blank'>TypeScript <img src='https://www.google.com/s2/favicons?domain=https://www.typescriptlang.org/' /><a/>
 - <a href='https://vitejs.dev/' target='_blank'>Vite <img src='https://www.google.com/s2/favicons?domain=https://vitejs.dev/' /><a/>
 - <a href='https://reactrouter.com/en/main' target='_blank'>React Router Dom V6 <img src='https://www.google.com/s2/favicons?domain=https://reactrouter.com/en/main' /><a/>
