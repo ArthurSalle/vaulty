@@ -8,9 +8,6 @@
 
 
 Password vault and generator
-<img src='https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB'/>
-
-https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 
 
 - <a href='https://fr.react.dev/' target='_blank'>React <img src='https://www.google.com/s2/favicons?domain=https://fr.react.dev/' /><a/> 
