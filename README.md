@@ -1,5 +1,5 @@
 <p align="center">  
-<img alt="vaulty logo" src="public/favicon.ico" width="60" />
+<img alt="vaulty logo" src="public/favicon.ico" width="40" />
 </p>
 <h1 align="center">
   Vaulty.
