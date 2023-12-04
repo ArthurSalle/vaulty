@@ -1,42 +1,4 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom'
-import App from '../App'
-import ErrorPage from '../modules/shared/components/error-page'
-import { VaultyHome } from './VaultyHome'
-import {
-  Connections,
-  connectionsLoader,
-} from '../modules/connection/components/Connections'
-import {
-  ReadConnection,
-  connectionLoader,
-} from '../modules/connection/components/ReadConnection'
-import {
-  CreateConnection,
-  createConnectionAction,
-} from '../modules/connection/components/CreateConnection'
-import {
-  EditConnection,
-  editConnectionAction,
-} from '../modules/connection/components/EditConnection'
-import { Wallet, walletLoader } from '../modules/wallet/components/Wallet'
-import {
-  Identities,
-  identitiesLoader,
-} from '../modules/identity/components/Identities'
-import {
-  ReadIdentity,
-  identityAction,
-  identityLoader,
-} from '../modules/identity/components/ReadIdentity'
-import {
-  EditIdentity,
-  editIdentityAction,
-} from '../modules/identity/components/EditIdentity'
-import {
-  CreateIdentity,
-  createIdentityAction,
-} from '../modules/identity/components/CreateIdentity'
-import { Settings } from './settings'
 import {
   CreateCreditCard,
   createCreditCardAction,
@@ -50,6 +12,38 @@ import {
   EditCreditCard,
   editCreditCardAction,
 } from '@/modules/wallet/components/EditCreditCard'
+import App from './App'
+import ErrorPage from './modules/shared/components/error-page'
+import { VaultyHome } from './pages/VaultyHome'
+import { Connections, connectionsLoader } from './pages/Connections'
+import {
+  ReadConnection,
+  connectionLoader,
+} from './modules/connection/components/ReadConnection'
+import {
+  CreateConnection,
+  createConnectionAction,
+} from './modules/connection/components/CreateConnection'
+import {
+  EditConnection,
+  editConnectionAction,
+} from './modules/connection/components/EditConnection'
+import { Wallet, walletLoader } from './pages/Wallet'
+import { Identities, identitiesLoader } from './pages/Identities'
+import {
+  ReadIdentity,
+  identityAction,
+  identityLoader,
+} from './modules/identity/components/ReadIdentity'
+import {
+  EditIdentity,
+  editIdentityAction,
+} from './modules/identity/components/EditIdentity'
+import {
+  CreateIdentity,
+  createIdentityAction,
+} from './modules/identity/components/CreateIdentity'
+import { Settings } from './pages/settings'
 
 export const router = createBrowserRouter([
   {
@@ -66,8 +60,8 @@ export const router = createBrowserRouter([
             path: '',
             element: <Connections />,
             loader: connectionsLoader,
-            shouldRevalidate: (args) => {
-              return args.formMethod === 'post' || args.formMethod === 'get'
+            shouldRevalidate: ({ formMethod }) => {
+              return formMethod === 'post' || formMethod === 'get'
             },
             children: [
               {
@@ -99,8 +93,8 @@ export const router = createBrowserRouter([
             path: '',
             element: <Wallet />,
             loader: walletLoader,
-            shouldRevalidate: (args) => {
-              return args.formMethod === 'post' || args.formMethod === 'get'
+            shouldRevalidate: ({ formMethod }) => {
+              return formMethod === 'post' || formMethod === 'get'
             },
             children: [
               {
@@ -132,8 +126,8 @@ export const router = createBrowserRouter([
             path: '',
             element: <Identities />,
             loader: identitiesLoader,
-            shouldRevalidate: (args) => {
-              return args.formMethod === 'post' || args.formMethod === 'get'
+            shouldRevalidate: ({ formMethod }) => {
+              return formMethod === 'post' || formMethod === 'get'
             },
             children: [
               {

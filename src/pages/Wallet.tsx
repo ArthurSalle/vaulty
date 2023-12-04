@@ -4,24 +4,24 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom'
-import { Identity } from '../helpers/create-identity'
-import { getIdentities } from '../storage/storage'
+import { SearchBar } from '../modules/wallet/components/SearchBar'
+import { getCreditCards } from '../modules/wallet/storage/storage'
+import { CreditCard } from '../modules/wallet/helpers/create-credit-card'
+import { CreditCardsList } from '../modules/wallet/components/CreditCardsList'
 import { ChangeEvent, useDeferredValue, useEffect, useState } from 'react'
-import { filterIdentities } from '../helpers/helpers'
-import { SearchBar } from './SearchBar'
-import { IdentitiesList } from './IdentitiesList'
+import { filterCreditCards } from '../modules/wallet/helpers/helpers'
 import { useMediaQuery } from 'usehooks-ts'
 
-export function identitiesLoader() {
-  return getIdentities()
+export function walletLoader() {
+  return getCreditCards()
 }
 
-export const Identities = () => {
-  const identities = useLoaderData() as Identity[]
+export const Wallet = () => {
+  const creditCards = useLoaderData() as CreditCard[]
   const [search, setSearch] = useState('')
+  const deferredSearch = useDeferredValue(search)
   const navigate = useNavigate()
   const location = useLocation()
-  const deferredSearch = useDeferredValue(search)
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
   function handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
@@ -33,16 +33,16 @@ export const Identities = () => {
   }
 
   useEffect(() => {
-    const firstIdentity = identities[0]
+    const firstCreditCard = creditCards[0]
     const matchLocationPathname =
-      location.pathname === '/identity' || location.pathname === '/identity/'
+      location.pathname === '/wallet' || location.pathname === '/wallet/'
 
-    if (isDesktop && firstIdentity && matchLocationPathname) {
-      navigate(`/identity/${firstIdentity.id}`, {
+    if (isDesktop && firstCreditCard && matchLocationPathname) {
+      navigate(`/wallet/${firstCreditCard.id}`, {
         replace: true,
       })
     }
-  }, [identities, location, isDesktop])
+  }, [creditCards, location, isDesktop])
 
   return (
     <div className='flex w-full h-[100dvh] relative'>
@@ -53,8 +53,8 @@ export const Identities = () => {
           onClear={clearSearch}
         />
 
-        <IdentitiesList
-          identities={filterIdentities(deferredSearch, identities)}
+        <CreditCardsList
+          creditCards={filterCreditCards(deferredSearch, creditCards)}
         />
       </div>
 

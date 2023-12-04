@@ -4,24 +4,24 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom'
-import { SearchBar } from './SearchBar'
-import { getCreditCards } from '../storage/storage'
-import { CreditCard } from '../helpers/create-credit-card'
-import { CreditCardsList } from './CreditCardsList'
+import { getConnections } from '../modules/connection/storage/storage'
+import { Connection } from '../modules/connection/helpers/create-connection'
 import { ChangeEvent, useDeferredValue, useEffect, useState } from 'react'
-import { filterCreditCards } from '../helpers/helpers'
+import { filterConnections } from '../modules/connection/helpers/helpers'
+import { SearchBar } from '../modules/connection/components/SearchBar'
+import { ConnectionsList } from '../modules/connection/components/ConnectionsList'
 import { useMediaQuery } from 'usehooks-ts'
 
-export function walletLoader() {
-  return getCreditCards()
+export function connectionsLoader() {
+  return getConnections()
 }
 
-export const Wallet = () => {
-  const creditCards = useLoaderData() as CreditCard[]
+export const Connections = () => {
+  const connections = useLoaderData() as Connection[]
   const [search, setSearch] = useState('')
-  const deferredSearch = useDeferredValue(search)
   const navigate = useNavigate()
   const location = useLocation()
+  const deferredSearch = useDeferredValue(search)
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
   function handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
@@ -33,16 +33,17 @@ export const Wallet = () => {
   }
 
   useEffect(() => {
-    const firstCreditCard = creditCards[0]
+    const firstConnectionId = connections[0]?.id
     const matchLocationPathname =
-      location.pathname === '/wallet' || location.pathname === '/wallet/'
+      location.pathname === '/connection' ||
+      location.pathname === '/connection/'
 
-    if (isDesktop && firstCreditCard && matchLocationPathname) {
-      navigate(`/wallet/${firstCreditCard.id}`, {
+    if (isDesktop && firstConnectionId && matchLocationPathname) {
+      navigate(`/connection/${firstConnectionId}`, {
         replace: true,
       })
     }
-  }, [creditCards, location, isDesktop])
+  }, [connections, location, isDesktop])
 
   return (
     <div className='flex w-full h-[100dvh] relative'>
@@ -53,8 +54,8 @@ export const Wallet = () => {
           onClear={clearSearch}
         />
 
-        <CreditCardsList
-          creditCards={filterCreditCards(deferredSearch, creditCards)}
+        <ConnectionsList
+          connectionsList={filterConnections(deferredSearch, connections)}
         />
       </div>
 

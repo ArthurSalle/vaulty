@@ -4,20 +4,20 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom'
-import { getConnections } from '../storage/storage'
-import { Connection } from '../helpers/create-connection'
+import { Identity } from '../modules/identity/helpers/create-identity'
+import { getIdentities } from '../modules/identity/storage/storage'
 import { ChangeEvent, useDeferredValue, useEffect, useState } from 'react'
-import { filterConnections } from '../helpers/helpers'
-import { SearchBar } from './SearchBar'
-import { ConnectionsList } from './ConnectionsList'
+import { filterIdentities } from '../modules/identity/helpers/helpers'
+import { SearchBar } from '../modules/identity/components/SearchBar'
+import { IdentitiesList } from '../modules/identity/components/IdentitiesList'
 import { useMediaQuery } from 'usehooks-ts'
 
-export function connectionsLoader() {
-  return getConnections()
+export function identitiesLoader() {
+  return getIdentities()
 }
 
-export const Connections = () => {
-  const connections = useLoaderData() as Connection[]
+export const Identities = () => {
+  const identities = useLoaderData() as Identity[]
   const [search, setSearch] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
@@ -33,17 +33,16 @@ export const Connections = () => {
   }
 
   useEffect(() => {
-    const firstConnectionId = connections[0]?.id
+    const firstIdentity = identities[0]
     const matchLocationPathname =
-      location.pathname === '/connection' ||
-      location.pathname === '/connection/'
+      location.pathname === '/identity' || location.pathname === '/identity/'
 
-    if (isDesktop && firstConnectionId && matchLocationPathname) {
-      navigate(`/connection/${firstConnectionId}`, {
+    if (isDesktop && firstIdentity && matchLocationPathname) {
+      navigate(`/identity/${firstIdentity.id}`, {
         replace: true,
       })
     }
-  }, [connections, location, isDesktop])
+  }, [identities, location, isDesktop])
 
   return (
     <div className='flex w-full h-[100dvh] relative'>
@@ -54,8 +53,8 @@ export const Connections = () => {
           onClear={clearSearch}
         />
 
-        <ConnectionsList
-          connectionsList={filterConnections(deferredSearch, connections)}
+        <IdentitiesList
+          identities={filterIdentities(deferredSearch, identities)}
         />
       </div>
 
