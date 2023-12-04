@@ -7,7 +7,7 @@
 </h1>
 
 
-Password vault and generator
+Personnal data vault & password generator. Store login/password, credit card & identity. 🔐
 
 
 - <a href='https://fr.react.dev/' target='_blank'>React <img src='https://www.google.com/s2/favicons?domain=https://fr.react.dev/' /><a/> 
