@@ -43,7 +43,7 @@ import {
   CreateIdentity,
   createIdentityAction,
 } from './modules/identity/components/CreateIdentity'
-import { Settings } from './pages/settings'
+import { Settings } from './pages/Settings'
 
 export const router = createBrowserRouter([
   {
