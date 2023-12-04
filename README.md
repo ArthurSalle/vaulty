@@ -18,3 +18,4 @@ Password vault and generator
 - <a href='https://zod.dev/' target='_blank'>Zod <img src='https://www.google.com/s2/favicons?domain=https://zod.dev/' /><a/>
 - <a href='https://tailwindcss.com/' target='_blank'>Tailwind <img src='https://www.google.com/s2/favicons?domain=https://tailwindcss.com/' /><a/>
 - <a href='https://ui.shadcn.com/' target='_blank'>Shadcn ui  <img src='https://www.google.com/s2/favicons?domain=https://ui.shadcn.com/' /><a/>
+- <a href='https://www.framer.com/motion/' target='_blank'>Framer Motion  <img src='https://www.google.com/s2/favicons?domain=https://www.framer.com/motion/' /><a/>
