@@ -1,13 +1,12 @@
 <p align="center">  
-<img alt="vaulty logo" src="public/favicon.ico" width="40" />
+<img alt="vaulty logo" src="public/og-vaulty.png" width="400" />
 </p>
 <h1 align="center">
-  <a href='https://vaulty.vercel.app/' target='_blank'>Vaulty.</a>
- 
+  <a href='https://vaulty.vercel.app/' target='_blank'>vaulty.</a>
 </h1>
 
 
-<h3>Personnal data vault & password generator.<br/>Store your login credentials, credit cards & identities. 🔐</h3>
+<h3 align="center">A password manager that allows you to securely store and <br/> manage your passwords and sensitive information 🔐</h3>
 
 
 - <a href='https://fr.react.dev/' target='_blank'>React <img src='https://www.google.com/s2/favicons?domain=https://fr.react.dev/' /><a/> 
